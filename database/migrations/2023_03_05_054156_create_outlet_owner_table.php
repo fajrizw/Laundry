@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('outlet_owner', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("id_outlet"); 
-            $table->foreignId("id_user");
+            $table->foreignId("id_outlet")->references('id')->on('outlet')->onDelete('cascade');
+            $table->foreignId("id_user")->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

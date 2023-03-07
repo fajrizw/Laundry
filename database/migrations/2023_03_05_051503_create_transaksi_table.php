@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("id_outlet");
             $table->string("kode_invoice");
-            $table->foreignId("id_member");
+            $table->foreignId("id_outlet")->references('id')->on('outlet')->onDelete('cascade');
+            $table->foreignId("id_member")->references('id')->on('member')->onDelete('cascade');
             $table->datetime("tgl");
             $table->datetime("batas_waktu");
             $table->datetime("tgl_bayar");
             $table->enum("dibayar",["dibayar","belum dibayar"]);
             $table->enum("status",["baru","proses","selesai","diambil"]);
-            $table->foreignId("id_user");
-            $table->foreignId("id_voucher");
+            $table->foreignId("id_user")->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

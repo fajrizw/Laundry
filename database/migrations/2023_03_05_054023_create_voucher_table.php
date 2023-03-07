@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("nama");
             $table->integer("diskon");
-            $table->foreignId("id_outlet");
+            $table->foreignId("id_outlet")->references('id')->on('outlet')->onDelete('cascade');
             $table->timestamps();
         });
     }

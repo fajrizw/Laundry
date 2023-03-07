@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('member_voucher', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("id_member");
+            $table->foreignId("id_member")->references('id')->on('member')->onDelete('cascade');
             $table->datetime("batas_waktu");
             $table->integer("qty");
-            $table->foreignId("id_voucher");
+            $table->foreignId("id_voucher")->references('id')->on('voucher')->onDelete('cascade');
             $table->timestamps();
         });
     }
