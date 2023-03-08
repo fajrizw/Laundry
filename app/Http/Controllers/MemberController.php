@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DataTables\MemberDataTable;
+use App\DataTables\UsersDataTable;
+use App\Models\Member;
 
 class MemberController extends Controller
 {
-    public function index()
+    public function index(MemberDataTable $dataTable)
     {
-        return view("table_master.member");
+        return $dataTable->render("table_master.member");
     }
 }
