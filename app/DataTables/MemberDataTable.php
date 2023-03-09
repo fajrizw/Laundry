@@ -40,24 +40,25 @@ class MemberDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-        // ->setTableId('users-table')
+        ->setTableId('member-table')
         ->columns($this->getColumns())
         ->minifiedAjax()
         //->dom('Bfrtip')
         ->orderBy(1)
+       ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
         ->selectStyleSingle()
-        ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
         ->parameters([
             "processing" => true,
             "autoWidth" => false,
         ])
+
         ->buttons([
             Button::make('excel'),
-            Button::make('csv'),
             Button::make('pdf'),
             Button::make('print'),
             Button::make('reset'),
-            Button::make('reload')
+            Button::make('reload'),
+            Button::make('add')
         ]);
     }
 

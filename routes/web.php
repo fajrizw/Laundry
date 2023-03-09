@@ -30,5 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/data-member', [MemberController::class, 'index']);
+Route::get('/data-member/create',[MemberController::class, 'create']);
+Route::post('/data_member-store',[MemberController::class, 'store']);
 
 require __DIR__.'/auth.php';
