@@ -7,15 +7,15 @@
                 <div class="row g-4">
                     <div class="col-lg-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Tambah Data Member</h6>
-                            <form action="{{route('member.store')}}" method="POST">
+                            <h6 class="mb-4">Tambah Data Outlet</h6>
+                            <form action="{{route('outlet.store')}}" method="POST">
                                 @csrf
                                 <div class="form-body" id="form">
                                     <div class="row pt-20">
                                         <div class="col-md-4">
                                             <div class="form-group has-success">
                                                 <label class="control-label">Nama</label>
-                                                <input type="text" class="form-control form-control-danger @error('nama') is-invalid @enderror" name="nama" value="{{old('nama')}}" placeholder="Nama Member" autocomplete="off">
+                                                <input type="text" class="form-control form-control-danger @error('nama') is-invalid @enderror" name="nama" value="{{old('nama')}}" placeholder="Masukkan Nama Outlet" autocomplete="off">
                                                 @error('nama')
                                                   <span class="invalid-feedback text-danger" role="alert">
                                                       <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group has-success">
                                                 <label class="control-label">No. Telp</label>
-                                                <input type="number" class="form-control form-control-danger @error('tlp') is-invalid @enderror" name="tlp" placeholder="Nomor Telepon" value="{{old('tlp')}}" autocomplete="off">
+                                                <input type="number" class="form-control form-control-danger @error('tlp') is-invalid @enderror" name="tlp" placeholder="Masukkan Nomor Telepon" value="{{old('tlp')}}" autocomplete="off">
                                                 @error('tlp')
                                                   <span class="invalid-feedback text-danger" role="alert">
                                                       <strong>{{ $message }}</strong>
@@ -37,25 +37,22 @@
                                         </div>
                                         <div class="col-md-4 mb-4">
 
-                                            <label class="control-label mb-2">Jenis Kelamin</label><br>
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="radio" @error('jenis_kelamin') is-invalid @enderror name="jenis_kelamin"  id="L"
-                                              value="L" autocomplete="off" {{ @old("jenis_kelamin" == "L" ? "checked" : "") }} />
-                                              <label class="form-check-label" for="femaleGender">Laki-Laki</label>
-                                            </div>
-
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="radio" @error('jenis_kelamin') is-invalid @enderror name="jenis_kelamin" id="P"
-                                              value="P" autocomplete="off" {{ @old("jenis_kelamin" == "P" ? "checked" : "") }} />
-                                              <label class="form-check-label" for="maleGender">Perempuan</label>
+                                            <div class="form-group has-success">
+                                                <label class="control-label">Biaya Admin</label>
+                                                <input type="number" class="form-control form-control-danger @error('biaya_admin') is-invalid @enderror" name="biaya_admin" placeholder="Masukkan Biaya Admin" value="{{old('biaya_admin')}}" autocomplete="off">
+                                                @error('biaya_admin')
+                                                  <span class="invalid-feedback text-danger" role="alert">
+                                                      <strong>{{ $message }}</strong>
+                                                  </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-12">
                                             <div class="form-group has-success">
-                                                <label class="control-label">Alamat</label>
-                                                <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" rows="3" placeholder="Alamat Customer"> {{old('alamat')}} </textarea>
-                                                @error('alamat')
+                                                <label class="control-label">Alamat Outlet</label>
+                                                <textarea name="alamat_outlet" class="form-control @error('alamat_outlet') is-invalid @enderror" rows="3" placeholder="Masukkan Alamat Outlet"> {{old('alamat_outlet')}} </textarea>
+                                                @error('alamat_outlet')
                                                   <span class="invalid-feedback text-danger" role="alert">
                                                       <strong>{{ $message }}</strong>
                                                   </span>
@@ -65,10 +62,10 @@
                                     </div>
                                     <!--/row-->
                                 </div>
-                                <input type="hidden" name="auth" value="Member">
+                                <input type="hidden" name="auth" value="Outlet">
                                 <div class="form-actions mt-3">
                                     <button type="submit" class="btn btn-primary mr-1 mb-1">Tambah</button>
-                                    <a href=" {{url('member')}}"  class="btn btn-outline-secondary mr-1 mb-1">Batal</a>
+                                    <a href=" {{url('outlet')}}"  class="btn btn-outline-secondary mr-1 mb-1">Batal</a>
                                 </div>
                             </form>
                         </div>

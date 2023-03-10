@@ -75,20 +75,16 @@ class UsersDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('name'),
+            Column::make('email'),
+            Column::make('email_verified_at'),
+            Column::make('tlp'),
             Column::make('created_at'),
             Column::make('updated_at'),
 
         ];
         return [
-            ['data' => 'id', 'name' => 'id', 'title' => 'id'],
-            ['data' => 'full_name', 'name' => 'full_name', 'title' => 'FULL NAME', 'orderable' => false],
-            ['data' => 'phone_number', 'name' => 'phone_number', 'title' => 'Phone Number'],
-            ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
-            ['data' => 'userProfile.country', 'name' => 'userProfile.country', 'title' => 'Country'],
-            ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
-            ['data' => 'userProfile.company_name', 'name' => 'userProfile.company_name', 'title' => 'Company'],
-            ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Join Date'],
+
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

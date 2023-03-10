@@ -36,6 +36,15 @@
     @vite(["resources/js/app.js"])
 
 
+    <style>
+        #form-control{
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+
+        button{
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        }
+    </style>
 </head>
 
 <body>
@@ -71,9 +80,9 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Master Data</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="button.html" class="dropdown-item">Data User</a>
-                            <a href="/data-member" class="dropdown-item">Data Member</a>
+                            <a href="/member" class="dropdown-item">Data Member</a>
                             <a href="button.html" class="dropdown-item">Data Transaksi</a>
-                            <a href="typography.html" class="dropdown-item">Data Outlet</a>
+                            <a href="/outlet" class="dropdown-item">Data Outlet</a>
                             <a href="element.html" class="dropdown-item">Data Paket</a>
                         </div>
                     </div>
@@ -187,6 +196,14 @@
         </nav>
         <!-- Navbar End -->
         {{-- @hasSection('content') --}}
+        <div class="p-3">
+            @if(Session::has("message"))
+
+            <span class="alert alert-{{ Session::get("message")["type"] }} d-flex align-items-center">{{ Session::get("message")["message"] }}</span>
+
+        @endif
+        </div>
+
         @yield('content')
         {{-- @endif --}}
 

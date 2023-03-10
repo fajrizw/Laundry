@@ -22,7 +22,43 @@ class MemberDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'member.action')
+            ->addColumn('action', function($query) {
+                $route = route("member.edit", $query->id);
+                $destroy = route("member.destroy", $query->id);
+
+                $csrf = csrf_token();
+
+                return <<<html
+                <div class="card-body p-5">
+                    <div class="modal fade" id="deleteModal$query->id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Member</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                            Apakah kamu yakin ingin menghapus member?
+                            </div>
+                            <div class="modal-footer">
+                            <form action="$destroy" method="POST">
+                                <input type="hidden" value="$csrf" name="_token">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class='d-flex'>
+                        <a class='btn btn-dark' href='$route'> <i class='fas fa-edit'></i></a>
+                        <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal$query->id'> <i class='fas fa-trash'></i></button>
+                    </div>
+                html;
+
+            })
             ->setRowId('id');
     }
 
@@ -31,7 +67,8 @@ class MemberDataTable extends DataTable
      */
     public function query(Member $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->orderBy("id","asc");
+        // $model->newQuery();
     }
 
     /**
@@ -54,6 +91,7 @@ class MemberDataTable extends DataTable
 
         ->buttons([
             Button::make('excel'),
+            Button::make('csv'),
             Button::make('pdf'),
             Button::make('print'),
             Button::make('reset'),

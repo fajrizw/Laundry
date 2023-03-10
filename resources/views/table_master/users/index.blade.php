@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="card">
-        <div class="card-header">Data Member</div>
+        <div class="card-header">Data User</div>
     </div>
     <span class="text-sm form-control"><i class="fas fa-info-circle me-3"></i>Klik kolom tertentu untuk melakukan sorting pada kolom tersebut</span>
         <br>

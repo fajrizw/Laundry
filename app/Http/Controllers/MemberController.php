@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\DataTables\MemberDataTable;
-use App\DataTables\UsersDataTable;
 use App\Models\Member;
+use App;
 
 class MemberController extends Controller
 {
@@ -22,43 +23,53 @@ class MemberController extends Controller
     }
 
     // Store
-    public function store(AddMemberRequest $request)
+    public function store(Request $request)
     {
+        $member = new Member();
+        $member->nama = $request->nama;
+        $member->alamat = $request->alamat;
+        $member->jenis_kelamin = $request->jenis_kelamin;
+        $member->tlp = $request->tlp;
+        $member->save();
 
-      try {
-        DB::beginTransaction();
-
-
-        $no_telp = preg_replace('/^0/','62',$request->no_telp);
-
-        $addMember = User::create([
-          'id_member' => Auth::id(),
-          'nama'          => $request->nama,
-          'alamat'        => $request->alamat,
-          'jenis_kelamin' => $request->jenis_kelamin,
-          'tlp'           => $no_telp,
-
+        return redirect()->route("member.index")->with("message", [
+            "message" => "Berhasil membuat member",
+            "type" => "success"
         ]);
 
-        $addMember->assignRole($addMember->auth);
+    }
 
-        if ($addMemberr) {
-          // Menyiapkan data Email
-          $data = array(
-            'nama'          => $addMember->nama,
-            'alamat'        => $addMember->alamat,
-            'jenis_kelamin' => $addMember->jenis_kelamin,
-            'email'         => $addMember->email,
-            'tlp'           => $addMember->no_telp,
-          );
+    public function update(Request $request, $id)
+    {
+        $member = Member::find($id);
+        $member->nama = $request->nama;
+        $member->alamat = $request->alamat;
+        $member->jenis_kelamin = $request->jenis_kelamin;
+        $member->tlp = $request->tlp;
+        $member->update();
 
-        }
-        DB::commit();
-        Session::flash('success','Member Berhasil Ditambah !');
-        return redirect('data-member');
-      } catch (ErrorException $e) {
-        DB::rollback();
-        throw new ErrorException($e->getMessage());
-      }
+        return redirect()->route("member.index")->with("message", [
+            "message" => "Berhasil mengedit member",
+            "type" => "success"
+        ]);
+
+    }
+    public function edit ($id)
+    {
+        $member = Member::find($id);
+        return view('table_master.member.edit', [
+            "member" => $member
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $member = Member::findOrFail($id);
+        $member->delete();
+
+        return redirect()->back()->with('message', [
+            "message" => 'Berhasil menghapus member',
+            "type" => "danger"
+        ]);
     }
 }
