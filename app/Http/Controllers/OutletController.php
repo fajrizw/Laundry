@@ -65,7 +65,7 @@ class OutletController extends Controller
 
         return redirect()->back()->with('message', [
             "message" => 'Berhasil menghapus outlet',
-            "type" => "danger"
+            "type" => "success"
         ]);
     }
 }

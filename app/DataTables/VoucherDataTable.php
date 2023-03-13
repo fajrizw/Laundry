@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Outlet;
+use App\Models\Voucher;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class OutletDataTable extends DataTable
+class VoucherDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,8 +23,8 @@ class OutletDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query) {
-            $route = route("outlet.edit", $query->id);
-            $destroy = route("outlet.destroy", $query->id);
+            $route = route("voucher.edit", $query->id);
+            $destroy = route("voucher.destroy", $query->id);
 
             $csrf = csrf_token();
 
@@ -34,13 +34,13 @@ class OutletDataTable extends DataTable
                     <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Delete Outlet</h5>
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Voucher</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         </div>
                         <div class="modal-body">
-                        Apakah kamu yakin ingin menghapus outlet?
+                        Apakah kamu yakin ingin menghapus voucher?
                         </div>
                         <div class="modal-footer">
                         <form action="$destroy" method="POST">
@@ -53,7 +53,7 @@ class OutletDataTable extends DataTable
                     </div>
                 </div>
                 <div class='d-flex'>
-                    <a class='btn btn-dark me-2' href='$route'> <i class='fas fa-edit'></i></a>
+                    <a class='btn btn-dark me-2' href='$route'><i class='fas fa-edit'></i></a>
                     <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal$query->id'> <i class='fas fa-trash'></i></button>
                 </div>
             </div>
@@ -66,7 +66,7 @@ class OutletDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Outlet $model): QueryBuilder
+    public function query(Voucher $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -77,11 +77,11 @@ class OutletDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('outlet-table')
+                    ->setTableId('voucher-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->dom('<"row align-items-center "<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
+                    ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
@@ -103,9 +103,8 @@ class OutletDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('nama'),
-            Column::make('alamat_outlet'),
-            Column::make('tlp'),
-            Column::make('biaya_admin'),
+            Column::make('diskon'),
+            Column::make('id_outlet'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')
@@ -121,6 +120,6 @@ class OutletDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Outlet_' . date('YmdHis');
+        return 'Voucher_' . date('YmdHis');
     }
 }

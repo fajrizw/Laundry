@@ -29,8 +29,8 @@ class MemberDataTable extends DataTable
                 $csrf = csrf_token();
 
                 return <<<html
-                <div class="card-body p-5">
-                    <div class="modal fade" id="deleteModal$query->id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div>
+                <div class="modal fade" id="deleteModal$query->id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -47,15 +47,16 @@ class MemberDataTable extends DataTable
                                 <input type="hidden" value="$csrf" name="_token">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                         </div>
                     </div>
                     <div class='d-flex'>
-                        <a class='btn btn-dark' href='$route'> <i class='fas fa-edit'></i></a>
+                        <a class='btn btn-dark me-2' href='$route'> <i class='fas fa-edit'></i></a>
                         <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal$query->id'> <i class='fas fa-trash'></i></button>
                     </div>
+                </div>
                 html;
 
             })
@@ -67,8 +68,9 @@ class MemberDataTable extends DataTable
      */
     public function query(Member $model): QueryBuilder
     {
-        return $model->orderBy("id","asc");
+        // return $model->orderBy("id","asc");
         // $model->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -82,7 +84,7 @@ class MemberDataTable extends DataTable
         ->minifiedAjax()
         //->dom('Bfrtip')
         ->orderBy(1)
-       ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
+       ->dom('<"row align-items-center "<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
         ->selectStyleSingle()
         ->parameters([
             "processing" => true,

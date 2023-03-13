@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('transaksi',function(Blueprint $table){
-            $table->foreignId("id_voucher")->references('id')->on('voucher')->onDelete('cascade');
+            $table->unsignedBigInteger("id_voucher")->nullable();
+            $table->foreign("id_voucher")->references('id')->on('voucher')->onDelete('cascade');
         });
     }
 

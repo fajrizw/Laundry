@@ -69,7 +69,7 @@ class MemberController extends Controller
 
         return redirect()->back()->with('message', [
             "message" => 'Berhasil menghapus member',
-            "type" => "danger"
+            "type" => "success"
         ]);
     }
 }

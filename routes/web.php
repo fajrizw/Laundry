@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\PaketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,5 +45,21 @@ Route::post('/outlet', [OutletController::class, 'store'])->name("outlet.store")
 Route::get('outlet/{id}/edit', [OutletController::class, 'edit'])->name("outlet.edit");
 Route::post("/outlet/{id}/update", [OutletController::class, "update"])->name("outlet.update");
 Route::post("/outlet/{id}", [OutletController::class, "destroy"])->name("outlet.destroy");
+
+
+Route::get('/voucher', [VoucherController::class, 'index'])->name("voucher.index");
+Route::get('/voucher/create', [VoucherController::class, 'create'])->name("voucher.create");
+Route::post('/voucher', [VoucherController::class, 'store'])->name("voucher.store");
+Route::get('voucher/{id}/edit', [VoucherController::class, 'edit'])->name("voucher.edit");
+Route::post("/voucher/{id}/update", [VoucherController::class, "update"])->name("voucher.update");
+Route::post("/voucher/{id}", [VoucherController::class, "destroy"])->name("voucher.destroy");
+
+Route::get('/paket', [PaketController::class, 'index'])->name("paket.index");
+Route::get('/paket/create', [PaketController::class, 'create'])->name("paket.create");
+Route::post('/paket', [PaketController::class, 'store'])->name("paket.store");
+Route::get('paket/{id}/edit', [PaketController::class, 'edit'])->name("paket.edit");
+Route::post("/paket/{id}/update", [PaketController::class, "update"])->name("paket.update");
+Route::post("/paket/{id}", [PaketController::class, "destroy"])->name("paket.destroy");
+
 
 require __DIR__.'/auth.php';
