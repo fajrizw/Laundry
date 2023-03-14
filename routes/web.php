@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\PaketController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-// Route::resource('member', MemberController::class);
+
+Route::get('/users', [UsersController::class, 'index'])->name("users.index");
+Route::get('/users/create',[UsersController::class, 'create'])->name("users.create");
+Route::post('/users',[UsersController::class, 'store'])->name("users.store");
+Route::get('users/{id}/edit', [UsersController::class, 'edit'])->name("users.edit");
+Route::post("/users/{id}/update", [UsersController::class, "update"])->name("users.update");
+Route::post("/users/{id}", [UsersController::class, "destroy"])->name("users.destroy");
+
 Route::get('/member', [MemberController::class, 'index'])->name("member.index");
 Route::get('/member/create',[MemberController::class, 'create'])->name("member.create");
 Route::post('/member',[MemberController::class, 'store'])->name("member.store");
@@ -60,6 +69,13 @@ Route::post('/paket', [PaketController::class, 'store'])->name("paket.store");
 Route::get('paket/{id}/edit', [PaketController::class, 'edit'])->name("paket.edit");
 Route::post("/paket/{id}/update", [PaketController::class, "update"])->name("paket.update");
 Route::post("/paket/{id}", [PaketController::class, "destroy"])->name("paket.destroy");
+
+Route::get('/transaksi', [TransaksiController::class, 'index'])->name("transaksi.index");
+Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name("transaksi.create");
+Route::post('/transaksi', [TransaksiController::class, 'store'])->name("transaksi.store");
+Route::get('transaksi/{id}/edit', [TransaksiController::class, 'edit'])->name("transaksi.edit");
+Route::post("/transaksi/{id}/update", [TransaksiController::class, "update"])->name("transaksi.update");
+Route::post("/transaksi/{id}/delete", [TransaksiController::class, "destroy"])->name("transaksi.destroy");
 
 
 require __DIR__.'/auth.php';

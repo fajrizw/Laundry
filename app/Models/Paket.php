@@ -22,4 +22,6 @@ class Paket extends Model
     public function outlet(): BelongsTo {
         return $this->belongsTo(Outlet::class);
     }
+
+
 }

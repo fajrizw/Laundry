@@ -21,9 +21,13 @@ class Outlet extends Model
     ];
 
     public function voucher(): HasMany {
-        return $this->HasMany(Voucher::class);
+        return $this->hasMany(Voucher::class);
     }
     public function paket(): HasMany {
-        return $this->HasMany(Paket::class);
+        return $this->hasMany(Paket::class);
     }
+    public function users(): HasMany {
+        return $this->hasMany(User::class);
+    }
+
 }

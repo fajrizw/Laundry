@@ -22,7 +22,50 @@ class UsersDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'users.action')
+        ->addColumn('action', function($query) {
+            $route = route("users.edit", $query->id);
+            $destroy = route("users.destroy", $query->id);
+
+            $csrf = csrf_token();
+
+            return <<<html
+            <div>
+            <div class="modal fade" id="deleteModal$query->id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete User</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        Apakah kamu yakin ingin menghapus user?
+                        </div>
+                        <div class="modal-footer">
+                        <form action="$destroy" method="POST">
+                            <input type="hidden" value="$csrf" name="_token">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class='d-flex'>
+                    <a class='btn btn-dark me-2' href='$route'> <i class='fas fa-edit'></i></a>
+                    <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal$query->id'> <i class='fas fa-trash'></i></button>
+                </div>
+            </div>
+            html;
+
+            })->editColumn("alamat_outlet", function($query) {
+                return $query->outlet->alamat_outlet;
+
+            })->filterColumn("alamat_outlet", function($query, $keyword) {
+                // idk
+                $query->where("id_outlet", \App\Models\Outlet::where("alamat_outlet", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })->orderColumn("alamat_outlet", false)
             ->setRowId('id');
     }
 
@@ -31,8 +74,9 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-         $model = User::query();
-        return $this->applyScopes($model);
+        // $model = User::query();
+        // return $this->applyScopes($model);
+        return $model->where("role", "!=", "Admin");
     }
 
     /**
@@ -58,7 +102,8 @@ class UsersDataTable extends DataTable
                         Button::make('pdf'),
                         Button::make('print'),
                         Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('reload'),
+                        Button::make('add')
                     ]);
 
     }
@@ -69,31 +114,22 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
             Column::make('name'),
             Column::make('email'),
             Column::make('email_verified_at'),
-            Column::make('tlp'),
+            Column::make('role'),
+            Column::make('alamat_outlet'),
             Column::make('created_at'),
             Column::make('updated_at'),
-
-        ];
-        return [
-
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->searchable(false)
-                  ->width(60)
-                  ->addClass('text-center hide-search'),
+            ->exportable(false)
+            ->printable(false)
+            ->width(60)
+            ->addClass('text-center'),
         ];
-    }
 
+    }
     /**
      * Get the filename for export.
      */

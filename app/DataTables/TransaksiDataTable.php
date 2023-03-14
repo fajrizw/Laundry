@@ -22,9 +22,60 @@ class TransaksiDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'transaksi.action')
-            ->setRowId('id');
+        ->addColumn('action', function($query) {
+            $route = route("transaksi.edit", $query->id);
+            $destroy = route("transaksi.destroy", $query->id);
+            $csrf = csrf_token();
+
+            return <<<html
+            <div>
+            <div class="modal fade" id="deleteModal$query->id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Transaksi</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        Apakah kamu yakin ingin menghapus transaksi?
+                        </div>
+                        <div class="modal-footer">
+                        <form action="$destroy" method="POST">
+                            <input type="hidden" value="$csrf" name="_token">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class='d-flex'>
+                    <a class='btn btn-dark me-2' href='$route'> <i class='fas fa-edit'></i></a>
+                    <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal$query->id'> <i class='fas fa-trash'></i> </button>
+                </div>
+            </div>
+            html;
+
+            })->editColumn("member", function($query) {
+                return $query->member->nama;
+
+            })->filterColumn("member", function($query, $keyword) {
+                // idk
+                $query->where("id_member", \App\Models\Member::where("nama", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })->orderColumn("member", false)
+
+              ->editColumn("jenis", function($query) {
+                return $query->paket->jenis;
+
+            })->filterColumn("jenis", function($query, $keyword) {
+                // idk
+                $query->where("id_paket", \App\Models\Paket::where("jenis", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })->orderColumn("jenis", false)
+              ->setRowId('id');
     }
+
 
     /**
      * Get the query source of dataTable.
@@ -52,7 +103,8 @@ class TransaksiDataTable extends DataTable
                         Button::make('pdf'),
                         Button::make('print'),
                         Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('reload'),
+                        Button::make('add')
                     ]);
     }
 
@@ -62,15 +114,20 @@ class TransaksiDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('member'),
+            Column::make('tgl'),
+            Column::make('batas_waktu'),
+            Column::make('status_pesanan'),
+            Column::make('status_pembayaran'),
+            Column::make('jenis'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(60)
+            ->addClass('text-center')
         ];
     }
 
