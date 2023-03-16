@@ -22,7 +22,7 @@ class OutletController extends Controller
     public function store(Request $request)
     {
         $outlet = new Outlet();
-        $outlet->nama = $request->nama;
+        $outlet->nama_outlet = $request->nama_outlet;
         $outlet->alamat_outlet = $request->alamat_outlet;
         $outlet->tlp = $request->tlp;
         $outlet->biaya_admin = $request->biaya_admin;
@@ -37,7 +37,7 @@ class OutletController extends Controller
     public function update(Request $request, $id)
     {
         $outlet = Outlet::find($id);
-        $outlet->nama = $request->nama;
+        $outlet->nama_outlet = $request->nama_outlet;
         $outlet->alamat_outlet = $request->alamat_outlet;
         $outlet->tlp = $request->tlp;
         $outlet->biaya_admin = $request->biaya_admin;

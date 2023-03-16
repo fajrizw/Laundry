@@ -5,9 +5,13 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+
+use App\Models\Role;
+use App\Models\Outlet;
 
 use Laravel\Sanctum\HasApiTokens;
 
@@ -22,7 +26,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nama',
-        'role',
+        'id_role',
         'email',
         'password',
     ];
@@ -52,10 +56,14 @@ class User extends Authenticatable
 
     public function role(): HasOne {
         // idk
-        return $this->hasOne(Roles::class, $foreignKey="id", $localKey="id_role");
+        return $this->hasOne(Role::class, "id", "id_role");
     }
 
     public function outlet(): BelongsTo {
         return $this->belongsTo(Outlet::class, $foreignKey="id_outlet", $ownerKey="id");
+    }
+
+    public function transaksi(): HasMany {
+        return $this->hasMany(Outlet::class, "id", "id_transaksi");
     }
 }

@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Member;
+use App\Models\Outlet;
+use App\Models\Paket;
+use App\Models\User;
+use App\Models\Voucher;
 class Transaksi extends Model
 {
     use HasFactory;
@@ -13,11 +18,16 @@ class Transaksi extends Model
 
     protected $fillable = [
         "kode_invoice",
+        "id_outlet",
+        "id_member",
         "tgl",
         "batas_waktu",
         "tgl_bayar",
-        "dibayar",
-        "status"
+        "status_pembayaran",
+        "status_pesanan",
+        "id_user",
+        "id_voucher",
+        "id_paket"
     ];
 
     public function member(): BelongsTo {
@@ -29,5 +39,13 @@ class Transaksi extends Model
 
     public function outlet(): BelongsTo {
         return $this->belongsTo(Outlet::class, 'id_outlet', 'id');
+    }
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
+    public function voucher(): BelongsTo {
+        return $this->belongsTo(User::class, 'id_voucher', 'id');
     }
 }

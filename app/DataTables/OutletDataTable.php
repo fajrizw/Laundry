@@ -53,7 +53,7 @@ class OutletDataTable extends DataTable
                     </div>
                 </div>
                 <div class='d-flex'>
-                    <a class='btn btn-dark me-2' href='$route'> <i class='fas fa-edit'></i></a>
+                    <a class='btn btn-dark me-2 ' href='$route'> <i class='fas fa-edit'></i></a>
                     <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal$query->id'> <i class='fas fa-trash'></i></button>
                 </div>
             </div>
@@ -102,7 +102,7 @@ class OutletDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('nama'),
+            Column::make('nama_outlet'),
             Column::make('alamat_outlet'),
             Column::make('tlp'),
             Column::make('biaya_admin'),

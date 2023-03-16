@@ -19,12 +19,18 @@ class TransaksiController extends Controller
 
     public function store(Request $request){
         $transaksi = new Transaksi();
-        $transaksi->nama = $request->nama;
+        $transaksi->kode_invoice = $request->kode_invoice;
+        $transaksi->id_outlet = $request->id_outlet;
+        $transaksi->id_member = $request->id_member;
         $transaksi->tgl = $request->tgl;
         $transaksi->batas_waktu = $request->batas_waktu;
+        $transaksi->tgl_bayar = $request->tgl_bayar;
         $transaksi->status_pesanan = $request->status_pesanan;
         $transaksi->status_pembayaran = $request->status_pembayaran;
-        $transaksi->jenis = $request->jenis;
+        $transaksi->id_user = $request->id_user;
+        $transaksi->id_voucher = $request->id_voucher;
+        $transaksi->id_paket = $request->id_paket;
+
         $transaksi->save();
 
         return redirect()->route("transaksi.index")->with("message", [
@@ -36,10 +42,17 @@ class TransaksiController extends Controller
     public function update(Request $request, $id)
     {
         $transaksi = Transaksi::find($id);
-        $transaksi->nama = $request->nama;
-        $transaksi->email = $request->email;
-        $transaksi->role = $request->role;
-        $transaksi->alamat_outlet = $request->alamat_outlet;
+        $transaksi->kode_invoice = $request->kode_invoice;
+        $transaksi->id_outlet = $request->id_outlet;
+        $transaksi->id_member = $request->id_member;
+        $transaksi->tgl = $request->tgl;
+        $transaksi->batas_waktu = $request->batas_waktu;
+        $transaksi->tgl_bayar = $request->tgl_bayar;
+        $transaksi->status_pesanan = $request->status_pesanan;
+        $transaksi->status_pembayaran = $request->status_pembayaran;
+        $transaksi->id_user = $request->id_user;
+        $transaksi->id_voucher = $request->id_voucher;
+        $transaksi->id_paket = $request->id_paket;
         $transaksi->update();
 
         return redirect()->route("transaksi.index")->with("message", [

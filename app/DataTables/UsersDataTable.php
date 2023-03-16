@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -59,14 +60,23 @@ class UsersDataTable extends DataTable
             </div>
             html;
 
-            })->editColumn("alamat_outlet", function($query) {
-                return $query->outlet->alamat_outlet;
-
-            })->filterColumn("alamat_outlet", function($query, $keyword) {
+            })->editColumn("nama_outlet", function($query) {
+                return $query->outlet->nama_outlet;
+            })->filterColumn("nama_outlet", function($query, $keyword) {
                 // idk
-                $query->where("id_outlet", \App\Models\Outlet::where("alamat_outlet", "LIKE", "%".$keyword."%")->first()->id ?? 0);
-            })->orderColumn("alamat_outlet", false)
+                $query->where("id_outlet", \App\Models\Outlet::where("nama_outlet", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })->orderColumn("nama_outlet", false)
+            ->editColumn("role", function($query) {
+                return Str::ucfirst($query->role->nama);
+            })
+            ->filterColumn("role", function($query, $keyword) {
+                // idk
+                $query->where("id_role", \App\Models\Role::where("nama", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })
+            ->orderColumn("role", false)
             ->setRowId('id');
+
+
     }
 
     /**
@@ -76,7 +86,7 @@ class UsersDataTable extends DataTable
     {
         // $model = User::query();
         // return $this->applyScopes($model);
-        return $model->where("role", "!=", "Admin");
+        return $model->where("id_role","!=", 1);
     }
 
     /**
@@ -117,9 +127,8 @@ class UsersDataTable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('email'),
-            Column::make('email_verified_at'),
             Column::make('role'),
-            Column::make('alamat_outlet'),
+            Column::make('nama_outlet'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

@@ -6,6 +6,8 @@ use App\DataTables\UsersDataTable;
 use App\Models\User;
 use App\Models\Outlet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class UsersController extends Controller
@@ -13,6 +15,7 @@ class UsersController extends Controller
     public function index(UsersDataTable $dataTable)
     {
         return $dataTable->render("table_master.users.index");
+        // return Auth::user()->outlet;
     }
 
     public function create(){
@@ -21,10 +24,11 @@ class UsersController extends Controller
 
     public function store(Request $request){
         $users = new User();
-        $users->nama = $request->nama;
+        $users->name = $request->name;
         $users->email = $request->email;
-        $users->role = $request->role;
-        $users->alamat_outlet = $request->alamat_outlet;
+        $users->password = Hash::make("12345678");
+        $users->id_role = $request->id_role;
+        $users->id_outlet = $request->id_outlet;
         $users->save();
 
         return redirect()->route("users.index")->with("message", [
@@ -36,10 +40,10 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $users = User::find($id);
-        $users->nama = $request->nama;
+        $users->name = $request->name;
         $users->email = $request->email;
-        $users->role = $request->role;
-        $users->alamat_outlet = $request->alamat_outlet;
+        $users->id_role = $request->id_role;
+        $users->id_outlet = $request->id_outlet;
         $users->update();
 
         return redirect()->route("users.index")->with("message", [

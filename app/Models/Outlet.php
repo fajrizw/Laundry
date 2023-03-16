@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use App\Models\Voucher;
 class Outlet extends Model
 {
     use HasFactory;
@@ -14,7 +14,7 @@ class Outlet extends Model
     protected $table = "outlet";
 
     protected $fillable = [
-        'nama',
+        'nama_outlet',
         'alamat_outlet',
         'tlp',
         'biaya_admin',
@@ -26,6 +26,7 @@ class Outlet extends Model
     public function paket(): HasMany {
         return $this->hasMany(Paket::class);
     }
+
     public function users(): HasMany {
         return $this->hasMany(User::class);
     }

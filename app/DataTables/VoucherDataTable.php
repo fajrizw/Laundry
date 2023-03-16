@@ -60,6 +60,12 @@ class VoucherDataTable extends DataTable
             html;
 
         })
+        ->editColumn("nama_outlet", function($query) {
+            return $query->outlet->nama_outlet;
+        })->filterColumn("nama_outlet", function($query, $keyword) {
+            // idk
+            $query->where("id", \App\Models\Outlet::where("nama_outlet", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+        })->orderColumn("nama_outlet", false)
         ->setRowId('id');
     }
 
@@ -104,7 +110,7 @@ class VoucherDataTable extends DataTable
             Column::make('id'),
             Column::make('nama'),
             Column::make('diskon'),
-            Column::make('id_outlet'),
+            Column::make('nama_outlet'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

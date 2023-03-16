@@ -60,6 +60,12 @@ class PaketDataTable extends DataTable
             html;
 
         })
+        ->editColumn("nama_outlet", function($query) {
+            return $query->outlet->nama_outlet;
+        })->filterColumn("nama_outlet", function($query, $keyword) {
+            // idk
+            $query->where("id", \App\Models\Outlet::where("nama_outlet", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+        })->orderColumn("nama_outlet", false)
         ->setRowId('id');
     }
 
