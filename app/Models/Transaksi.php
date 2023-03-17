@@ -24,7 +24,7 @@ class Transaksi extends Model
         "batas_waktu",
         "tgl_bayar",
         "status_pembayaran",
-        "status_pesanan",
+        "status_pemesanan",
         "id_user",
         "id_voucher",
         "id_paket"

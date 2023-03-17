@@ -25,7 +25,7 @@ class TransaksiController extends Controller
         $transaksi->tgl = $request->tgl;
         $transaksi->batas_waktu = $request->batas_waktu;
         $transaksi->tgl_bayar = $request->tgl_bayar;
-        $transaksi->status_pesanan = $request->status_pesanan;
+        $transaksi->status_pemesanan = $request->status_pemesanan;
         $transaksi->status_pembayaran = $request->status_pembayaran;
         $transaksi->id_user = $request->id_user;
         $transaksi->id_voucher = $request->id_voucher;
@@ -48,7 +48,7 @@ class TransaksiController extends Controller
         $transaksi->tgl = $request->tgl;
         $transaksi->batas_waktu = $request->batas_waktu;
         $transaksi->tgl_bayar = $request->tgl_bayar;
-        $transaksi->status_pesanan = $request->status_pesanan;
+        $transaksi->status_pemesanan = $request->status_pemesanan;
         $transaksi->status_pembayaran = $request->status_pembayaran;
         $transaksi->id_user = $request->id_user;
         $transaksi->id_voucher = $request->id_voucher;
