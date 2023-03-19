@@ -8,10 +8,10 @@ use App\DataTables\DetailTransaksiDataTable;
 
 class DetailTransaksiController extends Controller
 {
-    public function index(DetailTransaksiDataTable $dataTables)
-    {
-        return $dataTables->render("table_master.transaksi.index");
-    }
+    // public function index(DetailTransaksiDataTable $dataTables)
+    // {
+    //     return $dataTables->render("table_master.transaksi.index");
+    // }
 
     public function create(){
         return view("table_master.detail_transaksi.create");

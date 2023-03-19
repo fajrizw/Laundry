@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\TransaksiDataTable;
+use App\DataTables\DetailTransaksiDataTable;
 use Illuminate\Support\Carbon;
 use App\Models\Transaksi;
+use App\Models\DetailTransaksi;
+
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
-{
-    public function index(TransaksiDataTable $dataTable)
+{   
+    
+    public function index(TransaksiDataTable $transDataTable, DetailTransaksiDataTable $detDataTable)
     {
-        return $dataTable->render("table_master.transaksi.index");
+        return view('table_master.transaksi.index', [
+            'transDataTable' => $transDataTable->html(),
+            'detDataTable' => $detDataTable->html()
+        ]);
     }
 
     public function create(){
