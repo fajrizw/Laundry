@@ -21,6 +21,18 @@ class TransaksiController extends Controller
         ]);
     }
 
+    //Gets Users JSON
+
+    public function getTrans(TransaksiDataTable $transDataTable)
+    {
+        return $transDataTable->render('table_master.transaksi.index');
+    }
+
+    public function getDet(DetailTransaksiDataTable $detDataTable)
+    {
+        return $detDataTable->render('table_master.transaksi.index');
+    }
+
     public function create(){
         return view("table_master.transaksi.create");
     }

@@ -34,7 +34,3 @@
    {!! $detDataTable->scripts() !!}
 
 @endpush
-<!-- 
-@push('scripts')
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
-@endpush -->

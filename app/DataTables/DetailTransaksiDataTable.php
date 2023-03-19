@@ -117,7 +117,7 @@ class DetailTransaksiDataTable extends DataTable
         return $this->builder()
                     ->setTableId('detailtransaksi-table')
                     ->columns($this->getColumns())
-                    ->minifiedAjax()
+                    ->minifiedAjax( route('transaksi.det'))
                     ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
                     ->orderBy(1)
                     ->selectStyleSingle()
