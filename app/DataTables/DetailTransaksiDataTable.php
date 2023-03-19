@@ -23,41 +23,7 @@ class DetailTransaksiDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query) {
-            $route = route("detail_transaksi.edit", $query->id);
-            $destroy = route("detail_transaksi.destroy", $query->id);
-            $csrf = csrf_token();
-
-            return <<<html
-            <div>
-            <div class="modal fade" id="deleteModal$query->id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Delete Transaksi</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
-                        Apakah kamu yakin ingin menghapus transaksi?
-                        </div>
-                        <div class="modal-footer">
-                        <form action="$destroy" method="POST">
-                            <input type="hidden" value="$csrf" name="_token">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class='d-flex'>
-                    <a class='btn btn-dark me-2' href='$route'> <i class='fas fa-edit'></i></a>
-                    <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal$query->id'> <i class='fas fa-trash'></i> </button>
-                </div>
-            </div>
-            html;
-
+          
             })->editColumn("kode_invoice", function($query) {
                 return $query->transaksi->kode_invoice;
 
@@ -66,29 +32,29 @@ class DetailTransaksiDataTable extends DataTable
                 $query->where("id_transaksi", \App\Models\Transaksi::where("kode_invoice", "LIKE", "%".$keyword."%")->first()->id ?? 0);
             })->orderColumn("kode_invoice", false)
 
-            ->editColumn("tgl", function($query) {
-                return $query->transaksi->kode_invoice;
+            ->editColumn("tgl_pemesanan", function($query) {
+                return $query->transaksi->tgl;
 
-            })->filterColumn("tgl", function($query, $keyword) {
+            })->filterColumn("tgl_pemesanan", function($query, $keyword) {
                 // idk
                 $query->where("id_transaksi", \App\Models\Transaksi::where("tgl", "LIKE", "%".$keyword."%")->first()->id ?? 0);
-            })->orderColumn("tgl", false)
+            })->orderColumn("tgl_pemesanan", false)
             
-            ->editColumn("tgl_bayar", function($query) {
-                return $query->transaksi->kode_invoice;
+            ->editColumn("tgl_pembayaran", function($query) {
+                return $query->transaksi->tgl_bayar;
 
-            })->filterColumn("tgl_bayar", function($query, $keyword) {
+            })->filterColumn("tgl_pembayaran", function($query, $keyword) {
                 // idk
                 $query->where("id_transaksi", \App\Models\Transaksi::where("tgl_bayar", "LIKE", "%".$keyword."%")->first()->id ?? 0);
-            })->orderColumn("tgl_bayar", false)
+            })->orderColumn("tgl_pembayaran", false)
             
-            ->editColumn("status_pembayaran", function($query) {
-                return $query->transaksi->kode_invoice;
+            ->editColumn("status_pemesanan", function($query) {
+                return $query->transaksi->status_pemesanan;
 
-            })->filterColumn("status_pembayaran", function($query, $keyword) {
+            })->filterColumn("status_pemesanan", function($query, $keyword) {
                 // idk
-                $query->where("id_transaksi", \App\Models\Transaksi::where("status_pembayaran", "LIKE", "%".$keyword."%")->first()->id ?? 0);
-            })->orderColumn("status_pembayaran", false)
+                $query->where("id_transaksi", \App\Models\Transaksi::where("status_pemesanan", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })->orderColumn("status_pemesanan", false)
 
 
               ->editColumn("nama_paket", function($query) {
@@ -117,7 +83,7 @@ class DetailTransaksiDataTable extends DataTable
         return $this->builder()
                     ->setTableId('detailtransaksi-table')
                     ->columns($this->getColumns())
-                    ->minifiedAjax( route('transaksi.det'))
+                    ->minifiedAjax()
                     ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
                     ->orderBy(1)
                     ->selectStyleSingle()
@@ -128,7 +94,7 @@ class DetailTransaksiDataTable extends DataTable
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload'),
-                        Button::make('add'),
+                        Button::make('add')
                     ]);
     }
 
@@ -139,13 +105,13 @@ class DetailTransaksiDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('Kode Invoice'),
-            Column::make('Tgl Pemesanan'),
-            Column::make('Tgl Pembayaran'),
-            Column::make('Status Pembayaran'),
-            Column::make('Nama Paket'),
-            Column::make('Qty'),
-            Column::make('Keterangan'),
+            Column::make('kode_invoice'),
+            Column::make('tgl_pemesanan'),
+            Column::make('tgl_pembayaran'),
+            Column::make('status_pemesanan'),
+            Column::make('nama_paket'),
+            Column::make('qty'),
+            Column::make('keterangan'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)

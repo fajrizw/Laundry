@@ -77,7 +77,8 @@ Route::post('/transaksi', [TransaksiController::class, 'store'])->name("transaks
 Route::get('transaksi/{id}/edit', [TransaksiController::class, 'detail'])->name("transaksi.edit");
 Route::post("/transaksi/{id}/update", [TransaksiController::class, "update"])->name("transaksi.update");
 Route::post("/transaksi/{id}/delete", [TransaksiController::class, "destroy"])->name("transaksi.destroy");
-Route::get('/transaksi', [TransaksiController::class,"getTrans"])->name('transaksi.trans');
-Route::get('/transaksi',  [TransaksiController::class,"getDet"])->name('transaksi.det');
+
+
+Route::get('/transaksi/detail', [DetailTransaksiController::class, 'index'])->name("detail_transaksi.index");
 
 require __DIR__.'/auth.php';

@@ -12,6 +12,7 @@ use App\Models\Outlet;
 use App\Models\Paket;
 use App\Models\User;
 use App\Models\Voucher;
+use App\Models\DetailTransaksi;
 class Transaksi extends Model
 {   
     
@@ -53,6 +54,6 @@ class Transaksi extends Model
     }
 
     public function detail_transaksi(): HasMany {
-        return $this->hasMany(Outlet::class, "id", "id_detail_transaksi");
+        return $this->hasMany(DetailTransaksi::class, "id", "id_detail_transaksi");
     }
 }

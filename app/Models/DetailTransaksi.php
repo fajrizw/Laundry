@@ -21,10 +21,10 @@ class DetailTransaksi extends Model
     ];
 
     public function transaksi(): BelongsTo {
-        return $this->belongsTo(User::class, 'id_transaksi', 'id');
+        return $this->belongsTo(Transaksi::class, 'id_transaksi', 'id');
     }
 
     public function paket(): BelongsTo {
-        return $this->belongsTo(User::class, 'id_paket', 'id');
+        return $this->belongsTo(Paket::class, 'id_paket', 'id');
     }
 }

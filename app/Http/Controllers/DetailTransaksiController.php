@@ -8,10 +8,10 @@ use App\DataTables\DetailTransaksiDataTable;
 
 class DetailTransaksiController extends Controller
 {
-    // public function index(DetailTransaksiDataTable $dataTables)
-    // {
-    //     return $dataTables->render("table_master.transaksi.index");
-    // }
+    public function index(DetailTransaksiDataTable $dataTables)
+    {
+        return $dataTables->render("table_master.detail_transaksi.index");
+    }
 
     public function create(){
         return view("table_master.detail_transaksi.create");
@@ -31,6 +31,14 @@ class DetailTransaksiController extends Controller
         ]);
     }
 
+    
+    public function detail($id)
+    {
+        $detail_transaksi = DetailTransaksi::find($id);
+        return view("table_master.detail_transaksi.index", [
+           "detail_transaksi" => $detail_transaksi
+        ]);
+    }
 
     public function destroy($id)
     {
