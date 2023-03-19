@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use App\Models\Member;
 use App\Models\Outlet;
 use App\Models\Paket;
 use App\Models\User;
 use App\Models\Voucher;
 class Transaksi extends Model
-{
+{   
+    
     use HasFactory;
 
     protected $table = "transaksi";
@@ -47,5 +50,9 @@ class Transaksi extends Model
 
     public function voucher(): BelongsTo {
         return $this->belongsTo(User::class, 'id_voucher', 'id');
+    }
+
+    public function detail_transaksi(): HasMany {
+        return $this->hasMany(Outlet::class, "id", "id_detail_transaksi");
     }
 }

@@ -13,12 +13,23 @@
             {{ $dataTable->table() }}
 
             </div>
+            <br>
+            <div class="">
+
+            {{ $dataTables->table() }}
+
+            </div>
+            
         </div>
     </div>
 </div>
 
 
 @endsection
+
+@push('scripts')
+    {{ $dataTables->scripts(attributes: ['type' => 'module']) }}
+@endpush
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}

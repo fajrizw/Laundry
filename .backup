@@ -1,3 +1,107 @@
-  <!-- plugins:js -->
-  <script src="vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\DetailTransaksi;
+use App\DataTables\TransaksiDataTable;
+
+class DetailTransaksiController extends Controller
+{
+    public function index(TransaksiDataTable $dataTable)
+    {
+        return $dataTable->render("table_master.transaksi.index");
+    }
+
+    public function create(){
+        return view("table_master.detail_transaksi.create");
+    }
+
+    public function store(Request $request){
+        $detail_transaksi = new DetailTransaksi();
+        $detail_transaksi ->id_transaksi = $request->id_transaksi;
+        $detail_transaksi ->id_paket = $request->id_paket;
+        $detail_transaksi ->qty = $request->qty;
+        $detail_transaksi ->keterangan = $request->keterangan;
+        $detail_transaksi->save();
+
+        return redirect()->route("transaksi.index")->with("message", [
+            "message" => "Berhasil membuat transaksi",
+            "type" => "success"
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $detail_transaksi = DetailTransaksi::find($id);
+        $detail_transaksi ->id_transaksi = $request->id_transaksi;
+        $detail_transaksi ->id_paket = $request->id_paket;
+        $detail_transaksi ->qty = $request->qty;
+        $detail_transaksi ->keterangan = $request->keterangan;
+        $detail_transaksi->update();
+
+        return redirect()->route("transaksi.index")->with("message", [
+            "message" => "Berhasil mengedit detail transaksi",
+            "type" => "success"
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $detail_transaksi = DetailTransaksi::find($id);
+        return view("table_master.detail_transaksi.edit", [
+           "transaksi" => $transaksi
+        ]);
+    }
+
+
+    public function destroy($id)
+    {
+        $detail_transaksi = DetailTransaksi::findorFail($id);
+        $detail_transaksi->delete();
+
+        return redirect()->back()->with("message", [
+            "message" => "Berhasil menghapus detail transaksi",
+            "type" => "success"
+        ]);
+    }
+} 
+
+
+
+
+
+
+
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Paket;
+use App\Models\Transaksi;
+class DetailTransaksi extends Model
+{
+    use HasFactory;
+
+    protected $table = "detail_transaksi";
+
+    protected $fillable = [
+        "id_transaksi",
+        "id_paket",
+        "qty",
+        "keterangan"
+    ];
+
+    public function transaksi(): BelongsTo {
+        return $this->belongsTo(User::class, 'id_transaksi', 'id');
+    }
+
+    public function paket(): BelongsTo {
+        return $this->belongsTo(User::class, 'id_paket', 'id');
+    }
+}
+

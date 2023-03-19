@@ -19,7 +19,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group has-success">
                                             <label class="control-label">Kode Invoice</label>
-                                            <input type="number" class="form-control form-control-danger @error('kode_invoice') is-invalid @enderror" name="kode_invoice" value="{{ old("kode_invoice")}}" placeholder="Masukkan Kode Invoice" autocomplete="off">
+                                            <input type="text" class="form-control form-control-danger @error('kode_invoice') is-invalid @enderror" name="kode_invoice" value="{{ old("kode_invoice")}}" placeholder="Masukkan Kode Invoice" autocomplete="off">
                                             @error('kode_invoice')
                                               <span class="invalid-feedback text-danger" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="form-group has-success">
                                             <label class="control-label">Tgl Pemesanan</label>
-                                            <input type="datetime" class="form-control form-control-danger @error('tgl') is-invalid @enderror" name="tgl" placeholder="Masukkan Tgl Pemesanan" value="{{ old("tgl")}} " autocomplete="off">
+                                            <input type="date" class="form-control form-control-danger @error('tgl') is-invalid @enderror" name="tgl" placeholder="dd-mm-yyyy" value="{{ old("tgl")}} " autocomplete="off">
                                             @error('tgl')
                                               <span class="invalid-feedback text-danger" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -80,7 +80,7 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="form-group has-success">
                                             <label class="control-label">Batas Waktu</label>
-                                            <input type="datetime" class="form-control form-control-danger @error('batas_waktu') is-invalid @enderror" name="batas_waktu" placeholder="Masukkan Batas Waktu" value="{{ old("batas_waktu")}} " autocomplete="off">
+                                           <input type="date" class="form-control form-control-danger @error('batas_waktu') is-invalid @enderror" name="batas_waktu" placeholder="dd-mm-yyyy" value="{{ old("batas_waktu")}} "  min="2000-01-01"  autocomplete="off">  <!-- max="{{ now()->toDateString('Y-m-d') }}" -->
                                             @error('batas_waktu')
                                               <span class="invalid-feedback text-danger" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -91,7 +91,7 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="form-group has-success">
                                             <label class="control-label">Tgl Pembayaran</label>
-                                            <input type="datetime" class="form-control form-control-danger @error('tgl_bayar') is-invalid @enderror" name="tgl_bayar" placeholder="Masukkan Tgl Pembayaran" value="{{ old("tgl_bayar")}} " autocomplete="off">
+                                            <input type="date" class="form-control form-control-danger @error('tgl_bayar') is-invalid @enderror" name="tgl_bayar"placeholder="dd-mm-yyyy" value="{{ old("tgl_bayar")}} " autocomplete="off">
                                             @error('tgl_bayar')
                                               <span class="invalid-feedback text-danger" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -157,7 +157,7 @@
                                     <button type="submit" class="btn btn-primary mr-1 mb-1"
                                     @if(count($outlets) == 0) disabled @endif
                                     >Tambah</button>
-                                    <a href=" {{url('paket')}}"  class="btn btn-outline-secondary mr-1 mb-1">Batal</a>
+                                    <a href=" {{url('transaksi')}}"  class="btn btn-outline-secondary mr-1 mb-1">Batal</a>
                                 </div>
                                 </div>
                         </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\PaketController;
@@ -73,9 +74,10 @@ Route::post("/paket/{id}", [PaketController::class, "destroy"])->name("paket.des
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name("transaksi.index");
 Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name("transaksi.create");
 Route::post('/transaksi', [TransaksiController::class, 'store'])->name("transaksi.store");
-Route::get('transaksi/{id}/edit', [TransaksiController::class, 'edit'])->name("transaksi.edit");
+Route::get('transaksi/{id}/edit', [TransaksiController::class, 'detail'])->name("transaksi.edit");
 Route::post("/transaksi/{id}/update", [TransaksiController::class, "update"])->name("transaksi.update");
 Route::post("/transaksi/{id}/delete", [TransaksiController::class, "destroy"])->name("transaksi.destroy");
 
+Route::get('/transaksi', [DetailTransaksiController::class, 'index'])->name("transaksi.index");
 
 require __DIR__.'/auth.php';
