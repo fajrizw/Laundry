@@ -23,48 +23,52 @@ class DetailTransaksiDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query) {
-          
-            })->editColumn("kode_invoice", function($query) {
-                return $query->transaksi->kode_invoice;
 
-            })->filterColumn("kode_invoice", function($query, $keyword) {
-                // idk
-                $query->where("id_transaksi", \App\Models\Transaksi::where("kode_invoice", "LIKE", "%".$keyword."%")->first()->id ?? 0);
-            })->orderColumn("kode_invoice", false)
-
-            ->editColumn("tgl_pemesanan", function($query) {
-                return $query->transaksi->tgl;
-
-            })->filterColumn("tgl_pemesanan", function($query, $keyword) {
-                // idk
-                $query->where("id_transaksi", \App\Models\Transaksi::where("tgl", "LIKE", "%".$keyword."%")->first()->id ?? 0);
-            })->orderColumn("tgl_pemesanan", false)
-            
-            ->editColumn("tgl_pembayaran", function($query) {
-                return $query->transaksi->tgl_bayar;
-
-            })->filterColumn("tgl_pembayaran", function($query, $keyword) {
-                // idk
-                $query->where("id_transaksi", \App\Models\Transaksi::where("tgl_bayar", "LIKE", "%".$keyword."%")->first()->id ?? 0);
-            })->orderColumn("tgl_pembayaran", false)
-            
-            ->editColumn("status_pemesanan", function($query) {
-                return $query->transaksi->status_pemesanan;
-
-            })->filterColumn("status_pemesanan", function($query, $keyword) {
-                // idk
-                $query->where("id_transaksi", \App\Models\Transaksi::where("status_pemesanan", "LIKE", "%".$keyword."%")->first()->id ?? 0);
-            })->orderColumn("status_pemesanan", false)
-
-
-              ->editColumn("nama_paket", function($query) {
+            })->editColumn("nama_paket", function($query) {
                 return $query->paket->nama_paket;
 
             })->filterColumn("nama_paket", function($query, $keyword) {
                 // idk
                 $query->where("id_paket", \App\Models\Paket::where("nama_paket", "LIKE", "%".$keyword."%")->first()->id ?? 0);
             })->orderColumn("nama_paket", false)
-              ->setRowId('id');
+
+               ->editColumn("harga", function($query) {
+                return "Rp. " . $query->paket->harga;
+
+            })->filterColumn("harga", function($query, $keyword) {
+                // idk
+                $query->where("id_paket", \App\Models\Paket::where("harga", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })->orderColumn("harga", false)
+
+            ->editColumn("biaya_admin", function($query) {
+                return "Rp. " . $query->transaksi->outlet->biaya_admin;
+
+            })->filterColumn("biaya_admin", function($query, $keyword) {
+                // idk
+                $query->where("id_outlet", \App\Models\Outlet::where("biaya_admin", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })->orderColumn("biaya_admin", false)
+
+            ->editColumn("diskon", function($query) {
+                return  $query->transaksi->voucher->diskon."%";
+
+            })->filterColumn("diskon", function($query, $keyword) {
+                // idk
+                $query->where("id_voucher", \App\Models\Voucher::where("diskon", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            })->orderColumn("diskon", false)
+
+            // ->editColumn("total", function($query) {
+            //     return  $query->voucher->diskon."%";
+
+            // })->filterColumn("total", function($query, $keyword) {
+            //     // idk
+            //     $query->where("id_voucher", \App\Models\Voucher::where("total", "LIKE", "%".$keyword."%")->first()->id ?? 0);
+            // })->orderColumn("total", false)
+            ->setRowId('id');
+
+
+
+
+
     }
 
     /**
@@ -105,13 +109,13 @@ class DetailTransaksiDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('kode_invoice'),
-            Column::make('tgl_pemesanan'),
-            Column::make('tgl_pembayaran'),
-            Column::make('status_pemesanan'),
-            Column::make('nama_paket'),
-            Column::make('qty'),
             Column::make('keterangan'),
+            Column::make('nama_paket'),
+            Column::make('harga'),
+            Column::make('qty'),
+            Column::make('biaya_admin'),
+            Column::make('diskon'),
+            // Column::make('total'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)

@@ -14,8 +14,8 @@ use App\Models\User;
 use App\Models\Voucher;
 use App\Models\DetailTransaksi;
 class Transaksi extends Model
-{   
-    
+{
+
     use HasFactory;
 
     protected $table = "transaksi";
@@ -50,7 +50,7 @@ class Transaksi extends Model
     }
 
     public function voucher(): BelongsTo {
-        return $this->belongsTo(User::class, 'id_voucher', 'id');
+        return $this->belongsTo(Voucher::class, 'id_voucher', 'id');
     }
 
     public function detail_transaksi(): HasMany {

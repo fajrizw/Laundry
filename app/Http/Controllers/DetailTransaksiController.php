@@ -2,15 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
+use App\Models\Outlet;
+use App\Models\Paket;
+use App\Models\Transaksi;
+use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 use App\Models\DetailTransaksi;
 use App\DataTables\DetailTransaksiDataTable;
+use Illuminate\Support\Facades\DB;
 
 class DetailTransaksiController extends Controller
 {
-    public function index(DetailTransaksiDataTable $dataTables)
+    public function index(DetailTransaksiDataTable $dataTables, $id)
     {
-        return $dataTables->render("table_master.detail_transaksi.index");
+
+        $detailTransaksi = DetailTransaksi::find($id);
+        $transaksi = Transaksi::find($id);
+        $paket = Paket::find($id);
+        $member = Member::find($id);
+        $voucher = Voucher::find($id);
+        $users = User::find($id);
+        $outlet = Outlet::find($id);
+        // Call the stored procedure and pass the user ID as a parameter
+        $result = DB::select('CALL transaksi_penggunaBaru(?, ?)', [$member->id, $transaksi->id]);
+
+        // Process the result set returned by the stored procedure
+        // (in this case, it should contain a single row with a single column)
+        $transaksi_pertama = $result[0]->transaksi_pertama;
+
+  // Do something with the result
+        return $dataTables->render("table_master.detail_transaksi.index", compact('detailTransaksi', 'transaksi', 'paket', 'member', 'voucher', 'users', 'outlet', 'transaksi_pertama'));
     }
 
     public function create(){
@@ -31,14 +54,7 @@ class DetailTransaksiController extends Controller
         ]);
     }
 
-    
-    public function detail($id)
-    {
-        $detail_transaksi = DetailTransaksi::find($id);
-        return view("table_master.detail_transaksi.index", [
-           "detail_transaksi" => $detail_transaksi
-        ]);
-    }
+
 
     public function destroy($id)
     {
@@ -50,4 +66,4 @@ class DetailTransaksiController extends Controller
             "type" => "success"
         ]);
     }
-} 
+}

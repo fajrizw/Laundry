@@ -79,6 +79,6 @@ Route::post("/transaksi/{id}/update", [TransaksiController::class, "update"])->n
 Route::post("/transaksi/{id}/delete", [TransaksiController::class, "destroy"])->name("transaksi.destroy");
 
 
-Route::get('/transaksi/detail', [DetailTransaksiController::class, 'index'])->name("detail_transaksi.index");
+Route::get('/transaksi/{id}/detail', [DetailTransaksiController::class, 'index'])->name("detail_transaksi.index");
 
 require __DIR__.'/auth.php';

@@ -5,55 +5,109 @@
     <div class="content-wrapper">
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
-
                 <div class="card">
-
                     <div class="card-body">
                         <div class="row">
-                       
-                                @csrf
-                                <div class="row pt-20">
-                                <div class="mb-3 row">
-    <label class="col-sm-2 col-form-label">Kode Invoice</label>
-    <div class="col-sm-4">
-    <?php $detail_transaksi = \App\Models\DetailTransaksi::all()?>
-    @foreach ($detail_transaksi as $det)
-                                   
-      <input type="text" readonly class="form-control-plaintext" name="nama" value="{{$det->kode_invoice}}">   
-      @endforeach
-    </div>
-  </div>
-                                   
-                                  
-</div>
-</div>
-</div>
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Kode Invoice :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" name="kode_invoice"
+                                            value="{{$transaksi->kode_invoice}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Customer :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" name="nama"
+                                            value="{{$member->nama}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Status Pemesanan :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" name="status_pemesanan"
+                                            value="{{$transaksi->status_pemesanan}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Karyawan :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" name="karyawan"
+                                            value="{{$users->name}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Tgl Pemesanan:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" name="nama_paket"
+                                            value="{{$transaksi->tgl}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Tgl Pembayaran :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" name="qty"
+                                            value="{{$transaksi->tgl_bayar}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Estimasi Waktu :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" name="diskon"
+                                            value="{{$paket->estimasi_waktu}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Status Pembayaran :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" name="diskon"
+                                            value="{{$transaksi->status_pembayaran}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Total :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext"
+                                            value="{{'Rp. '. number_format(round($transaksi_pertama), 0, ',', '.')}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</div>
-</div>
-<div class="container mt-4">
-    <h2>Detail Transaksi</h2>
-    <span class="text-sm text-dark form-control bg-white border border-light"><i class="fas fa-info-circle me-3"></i>Klik kolom tertentu untuk melakukan sorting pada kolom tersebut</span>
-        <br>
+
+
+            <div class="container mt-4">
+                <h2>Detail Transaksi</h2>
+                <span class="text-sm text-dark form-control"><i class="fas fa-info-circle me-3"></i>Klik kolom tertentu
+                    untuk melakukan sorting pada kolom
+                    tersebut</span>
+                <br>
 
 
 
-            <div class="">
+                <div class="">
 
-            {{ $dataTable->table() }}
+                    {{ $dataTable->table() }}
+
+                </div>
+
+
 
             </div>
-    
-    
-            
         </div>
     </div>
-</div>
 
 
-@endsection
+    @endsection
 
 
-@push('scripts')
+    @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
-@endpush
+    @endpush
