@@ -53,7 +53,7 @@ class TransaksiDataTable extends DataTable
                     </div>
                 </div>
                 <div class='d-flex'>
-                <a class='btn btn-dark me-2' href='$show'> <i class='fas fa-eye'></i></a>
+                <a class='btn btn-primary me-2' href='$show'> <i class='fas fa-eye'></i></a>
                     <a class='btn btn-dark me-2' href='$route'> <i class='fas fa-edit'></i></a>
                     <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal$query->id'> <i class='fas fa-trash'></i> </button>
                 </div>
@@ -107,7 +107,7 @@ class TransaksiDataTable extends DataTable
                         Button::make('reset'),
                         Button::make('reload'),
                         Button::make('add'),
-                        
+
                     ]);
     }
 
