@@ -24,9 +24,11 @@ class MemberSeeder extends Seeder
         $something = explode("|", <<<STR
         Udin Ellison|Sigit Diaz|Yuna Sloan|Paylater Nielsen|Siti Arias|Herdun Tate|Epan Callahan|Radu Alvarez|Cuti Cooke|Kane Grant|Corong Klein|Kiete Mayo|Mina Waters|Tonas Nash|Alaier Russo|Fajri Walter|Dillon Haney|Josephine Watkins|Levi Suarez|Angelo Gomez|Adyson Rodgers|Bobby Erickson|Seth Williams|Jazmyn Cohen|Raphael Benson|Corbin Jarvis|Aliyah Woodward|Jaeden Lester|Kennedi Salazar|Brielle Pace|Conrad Carey|Aiden Mcmahon|Malik Wolf|Izayah Steele|Jax Gillespie|Taniya Horton|Kamari Frost|Skylar Delacruz|Moises Key|Heaven Vargas
         STR);
+        $outlet = [1,2,3,4,5,1,2,3,4,5];
 
         for($i = 0; $i < count($something); $i ++) {
             DB::table('member')->insert([
+                'id_outlet' => $outlet[$i],
                 'nama' => $something[$i],
                 'alamat' => "Jalan ".explode(" ", $something[$i])[1],
                 'jenis_kelamin' => $jenis_kelamin[array_rand($jenis_kelamin)],
