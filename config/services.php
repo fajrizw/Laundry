@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'wkhtmltopdf' => [
+        'bin' => 'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe',
+        'options' => [],
+    ],
+
 ];

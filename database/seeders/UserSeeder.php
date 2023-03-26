@@ -22,13 +22,14 @@ class UserSeeder extends Seeder
         STR);
         $role = [1,2,3,2,3,2,3,2,3,2];
         $outlet = [1,2,3,4,5,1,2,3,4,5];
+        $password = '12345678';
 
         for($i = 0; $i < count($something); $i ++) {
             $email = strtolower(str_replace(' ', '_', $something[$i])) . '@gmail.com';
         DB::table('users')->insert([
             'name' =>  $something[$i],
             'email' =>  $email,
-            'password' => Hash::make('password'),
+            'password' => Hash::make($password),
             'id_outlet' => $outlet[$i],
             'id_role' =>  $role[$i],
 

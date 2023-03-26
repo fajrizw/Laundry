@@ -486,6 +486,26 @@ return isChecked;
 }
 
     </script>
+    <script>
+      function updateDateTime() {
+  // Mendapatkan elemen dengan ID "date" dan "time"
+  var dateElement = document.getElementById("date");
+  var timeElement = document.getElementById("time");
+    // Mendapatkan waktu saat ini
+    var now = new Date();
+
+  // Memperbarui isi elemen dengan tanggal dan waktu saat ini
+  dateElement.innerHTML = now.toLocaleDateString();
+  timeElement.innerHTML = now.toLocaleTimeString();
+
+    // Mengatur timer untuk memperbarui waktu setiap detik
+    setTimeout(updateTime, 1000);
+}
+
+// Memanggil fungsi updateDateTime() saat halaman selesai dimuat
+window.onload = updateDateTime
+      </script>
+     
   <!-- End custom js for this page-->
 </body>
 

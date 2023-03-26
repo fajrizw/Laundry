@@ -17,7 +17,7 @@ class VoucherSeeder extends Seeder
     {
          
         $something =[ 
-        'Pengguna Baru','Hari Raya Idul Fitri','Hari Raya Idul Adha','Ulang tahun Web Laundry', 'Pengguna Baru','Pengguna Baru', 'Pengguna Baru','Pengguna Baru','Pengguna Baru','Pengguna Baru','Pengguna Baru','Pengguna Baru'];
+        'Pengguna Baru','Hari Raya Idul Fitri','Hari Raya Idul Adha','Ulang tahun Web Laundry', 'Pengguna Baru','Pengguna Baru', 'Pengguna Baru','Pengguna Baru','Pengguna Baru','Pengguna Baru'];
         $diskon = [10,20,20,30,10,10,10,10,10,10];
         $outlet = [1,1,1,1,2,3,4,5,6,7,8,9,];
 

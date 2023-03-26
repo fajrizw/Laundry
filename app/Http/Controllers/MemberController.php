@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use App\DataTables\MemberDataTable;
 use App\Models\Member;
+use App\Exports\MemberExport;
 use App;
 
 class MemberController extends Controller
@@ -36,7 +38,25 @@ class MemberController extends Controller
             "message" => "Berhasil membuat member",
             "type" => "success"
         ]);
+    
 
+    }
+    
+    public function export()
+    {
+        $members = Member::all();
+
+        $memberData = [];
+
+        foreach ($members as $member) {
+            $memberData[] = [
+                'nama' => $member->nama,
+                'alamat' => $member->alamat,
+                'jenis_kelamin' => $member->jenis_kelamin,
+                'tlp' => $member->tlp,
+            ];
+        }
+        return Excel::download(new MemberExport($memberData), 'members.xlsx');
     }
 
     public function update(Request $request, $id)

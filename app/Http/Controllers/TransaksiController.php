@@ -5,17 +5,23 @@ namespace App\Http\Controllers;
 use App\DataTables\TransaksiDataTable;
 use Illuminate\Support\Carbon;
 use App\Models\Transaksi;
+use App\Models\Member;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TransaksiExport;
 
 class TransaksiController extends Controller
 {   
     
     public function index(TransaksiDataTable $dataTable)
     {
+       
         return $dataTable->render("table_master.transaksi.index");
     }
 
     public function create(){
+      
         return view("table_master.transaksi.create");
     }
     
@@ -33,15 +39,23 @@ class TransaksiController extends Controller
         $transaksi->id_user = $request->id_user;
         $transaksi->id_voucher = $request->id_voucher;
         $transaksi->id_paket = $request->id_paket;
-
+        $transaksi->pajak = $request->pajak;
         $transaksi->save();
 
-        return redirect()->route("transaksi.index")->with("message", [
-            "message" => "Berhasil membuat transaksi",
-            "type" => "success"
-        ]);
+        return redirect()->route("detail_transaksi.create");
     }
 
+    
+    public function export()
+    { 
+      
+    // $trans = ['id', 'kode_invoice','status_pemesanan','status_pembayaran']; // field yang dibutuhkan
+
+
+    $transaksi = Transaksi::all();
+    return Excel::download(new TransaksiExport($transaksi), 'transaksi.xlsx');
+    }
+    
     public function update(Request $request, $id)
     {
         $transaksi = Transaksi::find($id);
@@ -56,6 +70,7 @@ class TransaksiController extends Controller
         $transaksi->id_user = $request->id_user;
         $transaksi->id_voucher = $request->id_voucher;
         $transaksi->id_paket = $request->id_paket;
+        $transaksi->pajak = $request->pajak;
         $transaksi->update();
 
         return redirect()->route("transaksi.index")->with("message", [

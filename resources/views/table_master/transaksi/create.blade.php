@@ -17,17 +17,6 @@
                                 @csrf
                                 <div class="row pt-20">
                                     <div class="col-md-6">
-                                        <div class="form-group has-success">
-                                            <label class="control-label">Kode Invoice</label>
-                                            <input type="text" class="form-control form-control-danger @error('kode_invoice') is-invalid @enderror" name="kode_invoice" value="{{ old("kode_invoice")}}" placeholder="Masukkan Kode Invoice" autocomplete="off">
-                                            @error('kode_invoice')
-                                              <span class="invalid-feedback text-danger" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                              </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Outlet</label>
                                             <select class="js-example-basic-single w-100 form-control" name="id_outlet">
@@ -57,7 +46,7 @@
                                         <div class="form-group">
                                             <label>Kasir</label>
                                             <select class="js-example-basic-single w-100 form-control" name="id_user">
-                                                <?php $users = \App\Models\User::all()?>
+                                                <?php $users = \App\Models\User::all()->where("id_role","!=", 1)?>
                                                 @forelse ($users as $user)
                                                 <option value="{{ $user->id }}">{{Str::ucfirst( $user->name ) }}</option>
                                                 @empty
@@ -102,8 +91,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Voucher</label>
-                                            <select class="js-example-basic-single w-100 form-control" name="id_user">
-                                                <?php $vouchers = \App\Models\Voucher::all()?>
+                                            <select class="js-example-basic-single w-100 form-control" name="id_voucher">
+                                                <?php $vouchers = \App\Models\Voucher::select('nama')->distinct()->get()?>
                                                 @forelse ($vouchers as $voucher)
                                                 <option value="{{ $voucher->id }}">{{Str::ucfirst( $voucher->nama ) }}</option>
                                                 @empty
@@ -129,11 +118,11 @@
                                         <div class="form-group">
                                             <label>Status Pembayaran</label>
                                             <select class="js-example-basic-single w-100 form-control" name="status_pembayaran">
-                                                <?php $trans = \App\Models\Transaksi::all()?>
+                                            <?php $trans = \App\Models\Transaksi::select('status_pembayaran')->distinct()->get()?>
                                                 @forelse ($trans as $transaksi)
                                                 <option value="{{ $transaksi->status_pembayaran }}">{{ $transaksi->status_pembayaran }}</option>
                                                 @empty
-                                                <option value="" disabled selected>Tidak ada data status pembayaran</option>
+                                                <option value="" disabled selected>Tidak ada data status pemesanan</option>
                                                 @endforelse
                                             </select>
                                         </div>
@@ -142,13 +131,24 @@
                                         <div class="form-group">
                                             <label>Status Pemesanan</label>
                                             <select class="js-example-basic-single w-100 form-control" name="status_pemesanan">
-                                                <?php $trans = \App\Models\Transaksi::all()?>
+                                                <?php $trans = \App\Models\Transaksi::select('status_pemesanan')->distinct()->get()?>
                                                 @forelse ($trans as $transaksi)
                                                 <option value="{{ $transaksi->status_pemesanan }}">{{ $transaksi->status_pemesanan }}</option>
                                                 @empty
                                                 <option value="" disabled selected>Tidak ada data status pemesanan</option>
                                                 @endforelse
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-group has-success">
+                                            <label class="control-label">Pajak</label>
+                                            <input type="number" class="form-control form-control-danger @error('pajak') is-invalid @enderror" name="pajak" placeholder="Masukkan jumlah pajak" value="{{ old("pajak")}} " autocomplete="off">
+                                            @error('pajak')
+                                              <span class="invalid-feedback text-danger" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 <input type="hidden" name="auth" value="Outlet">

@@ -8,9 +8,9 @@
       <div class="row">
         <div class="col-md-12 grid-margin">
           <div class="row">
-            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-              <h2 class="font-weight-bold">Welcome {{ Auth::user()->name }}</h2>
-              <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+            <div class="col-12 col-xl-8 mb-1 mb-xl-0">
+              <h2 class="font-weight-bold">Selamat Datang, {{ Auth::user()->name }}</h2>
+              <!-- <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6> -->
             </div>
             <div class="col-12 col-xl-4">
              <div class="justify-content-end d-flex">
@@ -37,12 +37,14 @@
               <img src="img/dashboard/people.svg" alt="people">
               <div class="weather-info">
                 <div class="d-flex">
-                  <div>
-                    <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
+                <i class="icon-clock mr-2"></i><h2 class="mb-0 font-weight-normal" id="time"></h2>
+                  <div>                    
+                 
+                    <!-- <h2 class="mb-0 font-weight-normal" id="current-time"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2> -->
                   </div>
                   <div class="ml-2">
-                    <h4 class="location font-weight-normal">Bangalore</h4>
-                    <h6 class="font-weight-normal">India</h6>
+                    <h4 class="location font-weight-normal" id="date"></h4>
+                    <h6 class="font-weight-normal">BubbleBox</h6>
                   </div>
                 </div>
               </div>
@@ -53,19 +55,17 @@
           <div class="row">
             <div class="col-md-6 mb-4 stretch-card transparent">
               <div class="card card-tale">
-                <div class="card-body">
-                  <p class="mb-4">Jumlah Transaksi</p>
-                  <p class="fs-30 mb-2">4006</p>
-                  <p>(30 days)</p>
+                <div class="card-body">   
+                <p class="mb-4">Jumlah Outlet</p>
+                  <p class="fs-30 mb-2">{{ $jumlah_outlet }}</p>   
                 </div>
               </div>
             </div>
             <div class="col-md-6 mb-4 stretch-card transparent">
               <div class="card card-dark-blue">
                 <div class="card-body">
-                  <p class="mb-4">Jumlah Outlet</p>
-                  <p class="fs-30 mb-2">61344</p>
-                  <p>(30 days)</p>
+                  <p class="mb-4">Jumlah Transaksi</p>
+               <p class="fs-30 mb-2">{{ $jumlah_transaksi }}</p>   
                 </div>
               </div>
             </div>
@@ -75,8 +75,7 @@
               <div class="card card-light-blue">
                 <div class="card-body">
                   <p class="mb-4">Jumlah Kasir</p>
-                  <p class="fs-30 mb-2">34040</p>
-                  <p>(30 days)</p>
+                  <p class="fs-30 mb-2">{{ $jumlah_kasir }}</p>
                 </div>
               </div>
             </div>
@@ -84,8 +83,8 @@
               <div class="card card-light-danger">
                 <div class="card-body">
                   <p class="mb-4">Jumlah Owner</p>
-                  <p class="fs-30 mb-2">47033</p>
-                  <p>(30 days)</p>
+                  <p class="fs-30 mb-2">{{ $jumlah_owner }}</p>
+  
                 </div>
               </div>
             </div>

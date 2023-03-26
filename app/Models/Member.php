@@ -20,7 +20,7 @@ class Member extends Model
     ];
 
     public function transaksi(): HasMany {
-        return $this->hasMany(Transaksi::class, 'id_transaksi', 'id');
+        return $this->hasMany(Transaksi::class, "id", "id_transaksi");
     }
 
 }

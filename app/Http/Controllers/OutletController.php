@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\DataTables\OutletDataTable;
 use App\Models\Outlet;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OutletExport;
 
 class OutletController extends Controller
 {
@@ -34,6 +36,25 @@ class OutletController extends Controller
         ]);
 
     }
+    
+    public function export()
+    {
+        $outlets = Outlet::all();
+
+        $outletData = [];
+
+        foreach ($outlets as $outlet) {
+            $outletData[] = [
+                'nama_outlet' => $outlet->nama_outlet,
+                'alamat_outlet' => $outlet->alamat_outlet,
+                'tlp' => $outlet->tlp,
+                'biaya_admin' => $outlet->biaya_admin,
+                
+            ];
+        }
+        return Excel::download(new OutletExport($outletData), 'outlets.xlsx');
+    }
+    
     public function update(Request $request, $id)
     {
         $outlet = Outlet::find($id);
@@ -67,5 +88,11 @@ class OutletController extends Controller
             "message" => 'Berhasil menghapus outlet',
             "type" => "success"
         ]);
+    }
+
+    
+    private function jumlahOutletDi($month, $year) {
+        $query = (array) DB::select("SELECT jumlahOutletDi($month, $year)")[0];
+        return $query["jumlahOutletDi($month, $year)"];
     }
 }

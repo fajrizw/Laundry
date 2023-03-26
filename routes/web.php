@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VoucherController;
@@ -24,10 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -45,6 +43,7 @@ Route::post("/users/{id}", [UsersController::class, "destroy"])->name("users.des
 Route::get('/member', [MemberController::class, 'index'])->name("member.index");
 Route::get('/member/create',[MemberController::class, 'create'])->name("member.create");
 Route::post('/member',[MemberController::class, 'store'])->name("member.store");
+Route::get('/member/export', [MemberController::class, 'export'])->name('member.export');
 Route::get('member/{id}/edit', [MemberController::class, 'edit'])->name("member.edit");
 Route::post("/member/{id}/update", [MemberController::class, "update"])->name("member.update");
 Route::post("/member/{id}", [MemberController::class, "destroy"])->name("member.destroy");
@@ -74,11 +73,14 @@ Route::post("/paket/{id}", [PaketController::class, "destroy"])->name("paket.des
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name("transaksi.index");
 Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name("transaksi.create");
 Route::post('/transaksi', [TransaksiController::class, 'store'])->name("transaksi.store");
+Route::get('/transaksi/export', [TransaksiController::class, 'export'])->name("transaksi.export");
 Route::get('transaksi/{id}/edit', [TransaksiController::class, 'detail'])->name("transaksi.edit");
 Route::post("/transaksi/{id}/update", [TransaksiController::class, "update"])->name("transaksi.update");
 Route::post("/transaksi/{id}/delete", [TransaksiController::class, "destroy"])->name("transaksi.destroy");
 
-
+Route::get('/transaksi/detail/create', [DetailTransaksiController::class, 'create'])->name("detail_transaksi.create");
+Route::get('/transaksi/{id}/detail', [DetailTransaksiController::class, 'store'])->name("detail_transaksi.store");
 Route::get('/transaksi/{id}/detail', [DetailTransaksiController::class, 'index'])->name("detail_transaksi.index");
+Route::get('/transaksi/{id}/detail/export-pdf', [DetailTransaksiController::class, 'exportPdf'])->name("detail_transaksi.exportPdf");
 
 require __DIR__.'/auth.php';

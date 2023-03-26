@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Role;
 use App\Models\Outlet;
 
+
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -64,6 +65,6 @@ class User extends Authenticatable
     }
 
     public function transaksi(): HasMany {
-        return $this->hasMany(Outlet::class, "id", "id_transaksi");
+        return $this->hasMany(Transaksi::class, "id", "id_transaksi");
     }
 }
