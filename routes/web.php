@@ -79,7 +79,7 @@ Route::post("/transaksi/{id}/update", [TransaksiController::class, "update"])->n
 Route::post("/transaksi/{id}/delete", [TransaksiController::class, "destroy"])->name("transaksi.destroy");
 
 Route::get('/transaksi/detail/create', [DetailTransaksiController::class, 'create'])->name("detail_transaksi.create");
-Route::get('/transaksi/{id}/detail', [DetailTransaksiController::class, 'store'])->name("detail_transaksi.store");
+Route::post('/transaksi/detail', [DetailTransaksiController::class, 'store'])->name("detail_transaksi.store");
 Route::get('/transaksi/{id}/detail', [DetailTransaksiController::class, 'index'])->name("detail_transaksi.index");
 Route::get('/transaksi/{id}/detail/export-pdf', [DetailTransaksiController::class, 'exportPdf'])->name("detail_transaksi.exportPdf");
 

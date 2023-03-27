@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
 
-        DB::unprepared('   
+        DB::unprepared('
         CREATE PROCEDURE transaksi_penggunaBaru(IN idtransaksi INT)
         BEGIN
         SELECT ((detail_transaksi.qty * paket.harga + outlet.biaya_admin + transaksi.pajak ) - ((detail_transaksi.qty * paket.harga + outlet.biaya_admin + transaksi.pajak) * (voucher.diskon/100))) AS transaksi_pertama

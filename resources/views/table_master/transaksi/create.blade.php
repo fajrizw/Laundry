@@ -92,7 +92,7 @@
                                         <div class="form-group">
                                             <label>Voucher</label>
                                             <select class="js-example-basic-single w-100 form-control" name="id_voucher">
-                                                <?php $vouchers = \App\Models\Voucher::select('nama')->distinct()->get()?>
+                                                <?php $vouchers = \App\Models\Voucher::get()?>
                                                 @forelse ($vouchers as $voucher)
                                                 <option value="{{ $voucher->id }}">{{Str::ucfirst( $voucher->nama ) }}</option>
                                                 @empty
@@ -140,17 +140,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-group has-success">
-                                            <label class="control-label">Pajak</label>
-                                            <input type="number" class="form-control form-control-danger @error('pajak') is-invalid @enderror" name="pajak" placeholder="Masukkan jumlah pajak" value="{{ old("pajak")}} " autocomplete="off">
-                                            @error('pajak')
-                                              <span class="invalid-feedback text-danger" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                              </span>
-                                            @enderror
-                                        </div>
-                                    </div>
+
                                 <input type="hidden" name="auth" value="Outlet">
                                 <div class="form-actions mt-3">
 

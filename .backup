@@ -1,4 +1,3 @@
-<?php
 
 namespace App\Http\Controllers;
 
@@ -65,16 +64,27 @@ class DetailTransaksiController extends Controller
             "type" => "success"
         ]);
     }
-} 
+}
+
+
+
+<div class="col-md-6">
+<div class="form-group">
+    <label>Voucher</label>
+    <select class="js-example-basic-single w-100 form-control" name="id_voucher">
+        <?php $vouchers = \App\Models\Voucher::select('nama')->distinct()->get()?>
+        @forelse ($vouchers as $voucher)
+        <option value="{{ $voucher->id }}">{{Str::ucfirst( $voucher->nama ) }}</option>
+        @empty
+        <option value="" disabled selected>Tidak ada data nama voucher</option>
+        @endforelse
+    </select>
+</div>
+</div>
 
 
 
 
-
-
-
-
-<?php
 
 namespace App\Models;
 

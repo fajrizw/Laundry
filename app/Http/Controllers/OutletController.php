@@ -36,7 +36,7 @@ class OutletController extends Controller
         ]);
 
     }
-    
+
     public function export()
     {
         $outlets = Outlet::all();
@@ -49,12 +49,12 @@ class OutletController extends Controller
                 'alamat_outlet' => $outlet->alamat_outlet,
                 'tlp' => $outlet->tlp,
                 'biaya_admin' => $outlet->biaya_admin,
-                
+
             ];
         }
         return Excel::download(new OutletExport($outletData), 'outlets.xlsx');
     }
-    
+
     public function update(Request $request, $id)
     {
         $outlet = Outlet::find($id);
@@ -90,9 +90,9 @@ class OutletController extends Controller
         ]);
     }
 
-    
-    private function jumlahOutletDi($month, $year) {
-        $query = (array) DB::select("SELECT jumlahOutletDi($month, $year)")[0];
-        return $query["jumlahOutletDi($month, $year)"];
-    }
+
+    // private function jumlahOutletDi($month, $year) {
+    //     $query = (array) DB::select("SELECT jumlahOutletDi($month, $year)")[0];
+    //     return $query["jumlahOutletDi($month, $year)"];
+    // }
 }

@@ -13,7 +13,7 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <form action="{{route('transaksi.store')}}" class="forms-sample" method="POST">
+                            <form action="{{route('detail_transaksi.store')}}" class="forms-sample" method="POST">
                                 @csrf
                                 <div class="form-body" id="form">
                                     <div class="row pt-20">
@@ -21,8 +21,10 @@
                                             <div class="form-group">
                                                 <label>Id Transaksi</label>
                                                 <select class="js-example-basic-single w-100 form-control"
-                                                    name="id_transaksi">
-                                                    <?php $transaksi = \App\Models\Transaksi::all()?>
+                                                    name="id_transaksi"><?php
+                                                    $usedTransaksiId = \App\Models\IdTransaksiUsed::pluck('id_transaksi')->toArray();
+                                                    $transaksi = \App\Models\Transaksi::whereNotIn('id', $usedTransaksiId)->get();
+                                                    ?>
                                                     @forelse ($transaksi as $trans)
                                                     <option value="{{ $trans->id }}">{{Str::ucfirst( $trans->id ) }}
                                                     </option>
@@ -58,6 +60,20 @@
                                                     name="qty" placeholder="Masukkan jumlah qty"
                                                     value="{{ old("qty")}} " autocomplete="off">
                                                 @error('qty')
+                                                <span class="invalid-feedback text-danger" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-group has-success">
+                                                <label class="control-label">Keterangan</label>
+                                                <input type="text"
+                                                    class="form-control form-control-danger @error('keterangan') is-invalid @enderror"
+                                                    name="keterangan" placeholder="Masukkan jumlah keterangan"
+                                                    value="{{ old("keterangan")}} " autocomplete="off">
+                                                @error('keterangan')
                                                 <span class="invalid-feedback text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

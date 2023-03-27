@@ -23,7 +23,7 @@ class DetailTransaksiDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query) {
-    
+
             })->editColumn("nama_paket", function($query) {
                 return $query->paket->nama_paket;
 
@@ -92,7 +92,8 @@ class DetailTransaksiDataTable extends DataTable
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
-                     
+
+
                     ]);
     }
 

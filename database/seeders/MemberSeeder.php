@@ -28,7 +28,6 @@ class MemberSeeder extends Seeder
 
         for($i = 0; $i < count($something); $i ++) {
             DB::table('member')->insert([
-                'id_outlet' => $outlet[$i],
                 'nama' => $something[$i],
                 'alamat' => "Jalan ".explode(" ", $something[$i])[1],
                 'jenis_kelamin' => $jenis_kelamin[array_rand($jenis_kelamin)],
