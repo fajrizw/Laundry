@@ -138,7 +138,7 @@
                             border: 1px;
                             border-top: var(--bs-border-width) solid;
                             opacity: .25;">
-                @foreach ($detailTransaksi as $nota)
+
                 <div class="row mx-3">
                     <table class="table">
                         <thead>
@@ -149,9 +149,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="font-weight: bold; font-size: 1.2em;">{{ $nota->transaksi->kode_invoice }}
+                                <td style="font-weight: bold; font-size: 1.2em;">{{ $transaksi->kode_invoice }}
                                 </td>
-                                <td style="text-align: right;  font-weight: bold; ">{{ $nota->transaksi->tgl_bayar }}
+                                <td style="text-align: right;  font-weight: bold; ">{{ $transaksi->tgl_bayar }}
                                 </td>
                             </tr>
                         </tbody>
@@ -174,17 +174,17 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $nota->transaksi->member->nama }}</td>
-                                <td style="text-align: right;">{{ $nota->transaksi->user->name }}</td>
+                                <td>{{ $transaksi->member->nama }}</td>
+                                <td style="text-align: right;">{{ $transaksi->user->name }}</td>
                             </tr>
                             <tr>
-                                <td>{{ $nota->transaksi->member->alamat }}</td>
+                                <td>{{ $transaksi->member->alamat }}</td>
                                 <td style="text-align: right;"><i
-                                        class="fas fa-dollar-sign"></i>{{ $nota->transaksi->user->outlet->alamat_outlet }}
+                                        class="fas fa-dollar-sign"></i>{{ $transaksi->user->outlet->alamat_outlet }}
                                 </td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-phone"></i>{{ $nota->transaksi->member->tlp }}</td>
+                                <td><i class="fas fa-phone"></i>{{ $transaksi->member->tlp }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -204,22 +204,22 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $nota->transaksi->paket->nama_paket }}</td>
-                                <td style="text-align: right;">{{ $nota->transaksi->paket->harga }}</td>
+                                <td>{{ $transaksi->paket->nama_paket }}</td>
+                                <td style="text-align: right;">{{ $transaksi->paket->harga }}</td>
                             </tr>
                             <tr>
                                 <td>Biaya Admin</td>
                                 <td style="text-align: right;"><i
-                                        class="fas fa-dollar-sign"></i>{{ $nota->transaksi->outlet->biaya_admin}}
+                                        class="fas fa-dollar-sign"></i>{{ $transaksi->outlet->biaya_admin}}
                                 </td>
                             </tr>
                             <tr>
                                 <td>Pajak</td>
-                                <td style="text-align: right;">{{ $nota->transaksi->pajak}}</td>
+                                <td style="text-align: right;">{{ $transaksi->pajak}}</td>
                             </tr>
                             <tr>
                                 <td>Diskon</td>
-                                <td style="text-align: right; color:red;">-{{ $nota->transaksi->voucher->diskon}}</td>
+                                <td style="text-align: right; color:red;">-{{ $transaksi->voucher->diskon}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -232,15 +232,15 @@
                         <tbody>
                             <tr>
                                 <td>Total</td>
-                                <td style="text-align: right;">Rp.12500</td>
+                                <td style="text-align: right;">{{ 'Rp. '. number_format(round($transaksi_pertama), 0, ',', '.') }}</td>
                             </tr>
 
                         </tbody>
                     </table>
-                    @endforeach
+
                 </div>
 
-               
+
 
 
             </div>

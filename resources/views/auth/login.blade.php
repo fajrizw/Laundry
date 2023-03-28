@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -43,4 +43,38 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
+
+@extends("layouts.app")
+@section("content")
+
+<div class="row d-flex justify-content-center">
+    <div class="col-4 p-5 rounded" style="border: 2px black">
+        <form action="{{ route("login") }}" class="mt-4" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="" class="form-label text-sm">Email</label>
+                <input type="email" name="email" id="email"  class="form-control bg-white @error('email') is-invalid @enderror">
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label text-sm">Password </label>
+                <input type="password" name="password" id="password" class="form-control bg-white @error('password') is-invalid @enderror">
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="mb-5">
+                <button class="btn btn-primary form-control mb-4" >{{ __('Masuk') }}</button>
+                <span class="text-sm opacity">Belum punya akun? <a href="{{ route("register") }}">Daftar</a></span>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection

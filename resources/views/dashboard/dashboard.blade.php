@@ -38,8 +38,8 @@
               <div class="weather-info">
                 <div class="d-flex">
                 <i class="icon-clock mr-2"></i><h2 class="mb-0 font-weight-normal" id="time"></h2>
-                  <div>                    
-                 
+                  <div>
+
                     <!-- <h2 class="mb-0 font-weight-normal" id="current-time"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2> -->
                   </div>
                   <div class="ml-2">
@@ -55,9 +55,9 @@
           <div class="row">
             <div class="col-md-6 mb-4 stretch-card transparent">
               <div class="card card-tale">
-                <div class="card-body">   
+                <div class="card-body">
                 <p class="mb-4">Jumlah Outlet</p>
-                  <p class="fs-30 mb-2">{{ $jumlah_outlet }}</p>   
+                  <p class="fs-30 mb-2">{{ $jumlah_outlet }}</p>
                 </div>
               </div>
             </div>
@@ -65,7 +65,7 @@
               <div class="card card-dark-blue">
                 <div class="card-body">
                   <p class="mb-4">Jumlah Transaksi</p>
-               <p class="fs-30 mb-2">{{ $jumlah_transaksi }}</p>   
+               <p class="fs-30 mb-2">{{ $jumlah_transaksi }}</p>
                 </div>
               </div>
             </div>
@@ -84,7 +84,7 @@
                 <div class="card-body">
                   <p class="mb-4">Jumlah Owner</p>
                   <p class="fs-30 mb-2">{{ $jumlah_owner }}</p>
-  
+
                 </div>
               </div>
             </div>
@@ -115,13 +115,15 @@
                   <h3 class="text-primary fs-30 font-weight-medium">34040</h3>
                 </div>
               </div>
-              <canvas id="order-chart"></canvas>
+              {{-- <canvas id="order-chart"></canvas> --}}
+              <div id="chart"></div>
             </div>
           </div>
         </div>
         <div class="col-md-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
+
              <div class="d-flex justify-content-between">
               <p class="card-title">Sales Report</p>
               <a href="#" class="text-info">View all</a>
@@ -667,7 +669,79 @@
 </div>
 <!-- page-body-wrapper ends -->
 </div>
-
+<script src="{{ asset("js/apexchart.js") }}"></script>
+  <script>
+    $.getJSON("{{ route('dashboard') }}", function(result) {
+      let data = [];
+      let keys = [];
+      result.data.forEach(element => {
+        let currentKey = Object.keys(element)[0];
+        keys.push(currentKey);
+      });
+      var options = {
+            chart: {
+            type: 'bar',
+            height: 400,
+            stacked: true,
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              dataLabels: {
+                total: {
+                  enabled: true,
+                  offsetX: 0,
+                  style: {
+                    fontSize: '13px',
+                    fontWeight: 900
+                  }
+                }
+              }
+            },
+          },
+          stroke: {
+            width: 1,
+            colors: ['#fff']
+          },
+          title: {
+            text: 'Grafik Transaksi Pengaduan 6 Bulan Terakhir'
+          },
+          xaxis: {
+            categories: keys,
+            labels: {
+              formatter: function (val) {
+                return val + ""
+              }
+            },
+            title: {
+              text: "Jumlah"
+            }
+          },
+          yaxis: {
+            title: {
+              text: "Bulan"
+            },
+          },
+          tooltip: {
+            y: {
+              formatter: function (val) {
+                return val + ";"
+              }
+            }
+          },
+          fill: {
+            opacity: 1
+          },
+          legend: {
+            position: 'top',
+            horizontalAlign: 'left',
+            offsetX: 40
+          }
+          };
+          var chart = new ApexCharts(document.querySelector("#chart"), options);
+          chart.render();
+    });
+  </script>
 
 @endsection
 

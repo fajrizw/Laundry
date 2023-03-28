@@ -54,25 +54,13 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="{{ route("dashboard") }}"><img src="img/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="{{ route("dashboard") }}"><img alt="BubbleBox"/></a>
         <a class="navbar-brand brand-logo-mini" href="{{ route("dashboard") }}"><img src="img/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item nav-search d-none d-lg-block">
-            <div class="input-group">
-              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
-              </div>
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-            </div>
-          </li>
-        </ul>
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
@@ -451,8 +439,8 @@
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script src="vendors/chart.js/Chart.min.js"></script>
-//   <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-//   <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+ <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+ <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <script src="{{ asset("js/dataTables.select.min.js") }}"></script>
 
   <!-- End plugin js for this page -->
@@ -472,6 +460,7 @@
   <script src="{{ asset("vendors/typeahead.js/typeahead.bundle.min.js") }}"></script>
   <script src="{{ asset("js/select2.js") }}"></script>
 
+  <script src="{{ asset("js/apexchart.js") }}"></script>
   <script>
     function validate(form) {
 var isChecked = Array.prototype.some.call(form.querySelectorAll('input[name=jenis_kelamin]'), function (radio) {
@@ -505,7 +494,6 @@ return isChecked;
 // Memanggil fungsi updateDateTime() saat halaman selesai dimuat
 window.onload = updateDateTime
       </script>
-     
   <!-- End custom js for this page-->
 </body>
 

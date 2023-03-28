@@ -10,21 +10,22 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TransaksiExport;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
-{   
-    
+{
+
     public function index(TransaksiDataTable $dataTable)
     {
-       
+
         return $dataTable->render("table_master.transaksi.index");
     }
 
     public function create(){
-      
+
         return view("table_master.transaksi.create");
     }
-    
+
 
     public function store(Request $request){
         $transaksi = new Transaksi();
@@ -45,17 +46,17 @@ class TransaksiController extends Controller
         return redirect()->route("detail_transaksi.create");
     }
 
-    
+
     public function export()
-    { 
-      
+    {
+
     // $trans = ['id', 'kode_invoice','status_pemesanan','status_pembayaran']; // field yang dibutuhkan
 
 
     $transaksi = Transaksi::all();
     return Excel::download(new TransaksiExport($transaksi), 'transaksi.xlsx');
     }
-    
+
     public function update(Request $request, $id)
     {
         $transaksi = Transaksi::find($id);
@@ -85,6 +86,7 @@ class TransaksiController extends Controller
         return view("table_master.transaksi.edit", [
            "transaksi" => $transaksi
         ]);
+
     }
 
 
@@ -98,4 +100,31 @@ class TransaksiController extends Controller
             "type" => "success"
         ]);
     }
+
+    // private function jumlahTransaksiPer($month, $year) {
+    //     $query = (array) DB::select("SELECT jumlahTransaksiPer($month, $year)")[0];
+    //     return $query["jumlahTransaksiPer($month, $year)"];
+    // }
+
+
+    // public function chart() {
+    //     $data = [];
+
+    //     for($i = 0; $i < 6; $i ++) {
+    //         $month = (int) Carbon::now()->subMonth($i)->format("m");
+    //         $year = (int) Carbon::now()->subMonth($i)->format("Y");
+
+    //         array_push($data, [
+    //             Carbon::now()->subMonth($i)->format("M Y") => [
+    //                 "Total" => $this->jumlahTransaksiPer($month, $year),
+
+    //             ]
+    //         ]);
+    //     }
+
+    //     return response()->json([
+    //         "data" => $data
+    //     ]);
+    // }
+
 }
