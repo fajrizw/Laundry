@@ -671,7 +671,7 @@
 </div>
 <script src="{{ asset("js/apexchart.js") }}"></script>
   <script>
-    $.getJSON("{{ route('dashboard') }}", function(result) {
+    $.getJSON("{{ route('transaksi.chart') }}", function(result) {
       let data = [];
       let keys = [];
       result.data.forEach(element => {

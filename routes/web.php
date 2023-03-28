@@ -74,6 +74,7 @@ Route::post("/paket/{id}/update", [PaketController::class, "update"])->name("pak
 Route::post("/paket/{id}", [PaketController::class, "destroy"])->name("paket.destroy");
 
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name("transaksi.index");
+Route::get('/dashboard', [TransaksiController::class, 'chart'])->name("transaksi.chart");
 Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name("transaksi.create");
 Route::post('/transaksi', [TransaksiController::class, 'store'])->name("transaksi.store");
 Route::get('/transaksi/export', [TransaksiController::class, 'export'])->name("transaksi.export");

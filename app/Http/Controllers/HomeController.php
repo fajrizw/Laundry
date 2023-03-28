@@ -11,10 +11,7 @@ use Carbon\Carbon;
 class HomeController extends Controller
 {   
     
-    private function jumlahTransaksiPer($month, $year) {
-        $query = (array) DB::select("SELECT jumlahTransaksiPer($month, $year)")[0];
-        return $query["jumlahTransaksiPer($month, $year)"];
-    }
+    
 
     public function index (Request $request)
     {
@@ -35,19 +32,9 @@ class HomeController extends Controller
 
             $data = [];
 
-        for($i = 0; $i < 6; $i ++) {
-            $month = (int) Carbon::now()->subMonth($i)->format("m");
-            $year = (int) Carbon::now()->subMonth($i)->format("Y");
+       
 
-            array_push($data, [
-                Carbon::now()->subMonth($i)->format("M Y") => [
-                    "Total" => $this->jumlahTransaksiPer($month, $year),
-
-                ]
-            ]);
-        }
-
-        return view('dashboard/dashboard', compact('jumlah_transaksi','jumlah_outlet','jumlah_kasir','jumlah_owner','date', 'data'));
+        return view('dashboard/dashboard', compact('jumlah_transaksi','jumlah_outlet','jumlah_kasir','jumlah_owner','date'));
     }
 
     

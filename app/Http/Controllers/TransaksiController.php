@@ -101,30 +101,30 @@ class TransaksiController extends Controller
         ]);
     }
 
-    // private function jumlahTransaksiPer($month, $year) {
-    //     $query = (array) DB::select("SELECT jumlahTransaksiPer($month, $year)")[0];
-    //     return $query["jumlahTransaksiPer($month, $year)"];
-    // }
+    private function jumlahTransaksiPer($month, $year) {
+        $query = (array) DB::select("SELECT jumlahTransaksiPer($month, $year)")[0];
+        return $query["jumlahTransaksiPer($month, $year)"];
+    }
 
 
-    // public function chart() {
-    //     $data = [];
+    public function chart() {
+        $data = [];
 
-    //     for($i = 0; $i < 6; $i ++) {
-    //         $month = (int) Carbon::now()->subMonth($i)->format("m");
-    //         $year = (int) Carbon::now()->subMonth($i)->format("Y");
+        for($i = 0; $i < 6; $i ++) {
+            $month = (int) Carbon::now()->subMonth($i)->format("m");
+            $year = (int) Carbon::now()->subMonth($i)->format("Y");
 
-    //         array_push($data, [
-    //             Carbon::now()->subMonth($i)->format("M Y") => [
-    //                 "Total" => $this->jumlahTransaksiPer($month, $year),
+            array_push($data, [
+                Carbon::now()->subMonth($i)->format("M Y") => [
+                    "Total" => $this->jumlahTransaksiPer($month, $year),
 
-    //             ]
-    //         ]);
-    //     }
+                ]
+            ]);
+        }
 
-    //     return response()->json([
-    //         "data" => $data
-    //     ]);
-    // }
+        return response()->json([
+            "data" => $data
+        ]);
+    }
 
 }

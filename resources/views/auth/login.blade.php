@@ -72,7 +72,6 @@
             </div>
             <div class="mb-5">
                 <button class="btn btn-primary form-control mb-4" >{{ __('Masuk') }}</button>
-                <span class="text-sm opacity">Belum punya akun? <a href="{{ route("register") }}">Daftar</a></span>
             </div>
         </form>
     </div>
