@@ -77,10 +77,10 @@ class DetailTransaksiController extends Controller
     {
 
          // Retrieve the DetailTransaksi record using its own primary key
-        $detailTransaksi = DetailTransaksi::find($id);
+        $transaksi = Transaksi::find($id);
 
         // Retrieve the Transaksi record using its own primary key
-        $transaksi = Transaksi::find($detailTransaksi->id_transaksi);
+        $detailTransaksi = DetailTransaksi::where("id_transaksi", $id)->first();
 
         // Retrieve the Paket record using the paket_id foreign key stored in the DetailTransaksi record
         $paket = Paket::find($detailTransaksi->id_paket);
