@@ -204,7 +204,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $transaksi->paket->nama_paket }}</td>
+                                <td>{{ $transaksi->paket->nama_paket }} ({{ $detailTransaksi->qty }})</td>
                                 <td style="text-align: right;">{{ $transaksi->paket->harga }}</td>
                             </tr>
                             <tr>
@@ -219,7 +219,7 @@
                             </tr>
                             <tr>
                                 <td>Diskon</td>
-                                <td style="text-align: right; color:red;">-{{ $transaksi->voucher->diskon}}</td>
+                                <td style="text-align: right; color:red;">{{ $transaksi->voucher->diskon}} %</td>
                             </tr>
                         </tbody>
                     </table>
