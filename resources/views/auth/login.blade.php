@@ -45,13 +45,21 @@
     </form>
 </x-guest-layout> --}}
 
-@extends("layouts.app")
-@section("content")
-
-<div class="row d-flex justify-content-center">
-    <div class="col-4 p-5 rounded" style="border: 2px black">
-        <form action="{{ route("login") }}" class="mt-4" method="POST">
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{{ asset("assets/css/bootstrap-min.css") }}">
+  <link rel="stylesheet" href="{{ asset("assets/css/bootstrap.css") }}">
+  
+<section class="vh-100" style="background-color: #7DA0FA;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 ">
+          <form action="{{ route("login") }}" class="mt-4" method="POST">
             @csrf
+            <div class="d-flex justify-content-center mb-2">
+                    <img src="img/welcome.svg" style=" width: 60%;" alt="Welcome">
+                </div>
             <div class="mb-3">
                 <label for="" class="form-label text-sm">Email</label>
                 <input type="email" name="email" id="email"  class="form-control bg-white @error('email') is-invalid @enderror">
@@ -61,7 +69,7 @@
                     </span>
                 @enderror
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="" class="form-label text-sm">Password </label>
                 <input type="password" name="password" id="password" class="form-control bg-white @error('password') is-invalid @enderror">
                 @error('password')
@@ -70,10 +78,17 @@
                     </span>
                 @enderror
             </div>
+        
             <div class="mb-5">
-                <button class="btn btn-primary form-control mb-4" >{{ __('Masuk') }}</button>
+                <button class="btn btn-outline-dark form-control mb-4 font-weight-bold" style="font-family: Verdana, sans-serif;">{{ __('Masuk') }}</button>
             </div>
-        </form>
+</form>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-@endsection
+  </div>
+  <script src="{{ asset("vendors/js/vendor.bundle.base.js") }}"></script>
+  <script src="{{ asset("assets/js/bootstrap.js") }}"></script>
+</section>
+
