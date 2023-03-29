@@ -22,9 +22,7 @@ return new class extends Migration
             AND detail_transaksi.id_paket=paket.id
             AND transaksi.id_voucher=voucher.id
             AND transaksi.id_member=member.id
-            AND transaksi.id_outlet=outlet.id AND transaksi.id=idtransaksi
-            AND transaksi.status_pembayaran = \'dibayar\'
-            AND transaksi.status_pemesanan = \'selesai\';
+            AND transaksi.id_outlet=outlet.id AND transaksi.id=idtransaksi;
         END
         ');
     }

@@ -21,11 +21,8 @@
                                             <div class="form-group">
                                                 <label>Id Transaksi</label>
                                                 <select class="js-example-basic-single w-100 form-control"
-                                                    name="id_transaksi"><?php
-                                                    $usedTransaksiId = \App\Models\IdTransaksiUsed::pluck('id_transaksi')->toArray();
-                                                    $transaksi = \App\Models\Transaksi::whereNotIn('id', $usedTransaksiId)->get();
-                                                    ?>
-                                                    @forelse ($transaksi as $trans)
+                                                    name="id_transaksi">
+                                                    @forelse (\App\Models\Transaksi::all() as $trans)
                                                     <option value="{{ $trans->id }}">{{Str::ucfirst( $trans->id ) }}
                                                     </option>
                                                     @empty

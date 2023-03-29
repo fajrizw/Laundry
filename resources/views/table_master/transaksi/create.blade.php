@@ -119,8 +119,8 @@
                                             <label>Status Pembayaran</label>
                                             <select class="js-example-basic-single w-100 form-control" name="status_pembayaran">
                                             <?php $trans = \App\Models\Transaksi::select('status_pembayaran')->distinct()->get()?>
-                                                @forelse ($trans as $transaksi)
-                                                <option value="{{ $transaksi->status_pembayaran }}">{{ $transaksi->status_pembayaran }}</option>
+                                                @forelse (["dibayar", "belum dibayar"] as $status_bayar)
+                                                <option value="{{ $status_bayar}}">{{ $status_bayar }}</option>
                                                 @empty
                                                 <option value="" disabled selected>Tidak ada data status pemesanan</option>
                                                 @endforelse
@@ -132,8 +132,8 @@
                                             <label>Status Pemesanan</label>
                                             <select class="js-example-basic-single w-100 form-control" name="status_pemesanan">
                                                 <?php $trans = \App\Models\Transaksi::select('status_pemesanan')->distinct()->get()?>
-                                                @forelse ($trans as $transaksi)
-                                                <option value="{{ $transaksi->status_pemesanan }}">{{ $transaksi->status_pemesanan }}</option>
+                                                @forelse (["baru", "proses","selesai","diambil"] as $status_pesan)
+                                                <option value="{{ $status_pesan }}">{{ $status_pesan }}</option>
                                                 @empty
                                                 <option value="" disabled selected>Tidak ada data status pemesanan</option>
                                                 @endforelse
