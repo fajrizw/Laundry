@@ -166,7 +166,7 @@ class TransaksiDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('member'),
-            Column::make('tanggal'),
+            Column::make('tgl'),
             Column::make('batas_waktu'),
             Column::make('status_pemesanan'),
             Column::make('status_pembayaran'),
