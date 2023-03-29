@@ -46,7 +46,7 @@
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect2">Role</label>
                                             <select class="js-example-basic-single form-control" name="id_role" id="exampleFormControlSelect2">
-                                                <?php $roles = \App\Models\Role::all()?>
+                                                <?php $roles = \App\Models\Role::all()->where("id","!=", 1)?>
                                                 @forelse ($roles as $role)
                                                 <option value="{{ $role->id }}" {{ $users->id_role == $role->id ? "selected" : "" }}>{{ Str::ucfirst($role->nama) }}</option>
                                                 @empty

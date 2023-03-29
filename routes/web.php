@@ -46,7 +46,6 @@ Route::post("/users/{id}", [UsersController::class, "destroy"])->name("users.des
 Route::get('/member', [MemberController::class, 'index'])->name("member.index");
 Route::get('/member/create',[MemberController::class, 'create'])->name("member.create");
 Route::post('/member',[MemberController::class, 'store'])->name("member.store");
-Route::get('/member/export', [MemberController::class, 'export'])->name('member.export');
 Route::get('member/{id}/edit', [MemberController::class, 'edit'])->name("member.edit");
 Route::post("/member/{id}/update", [MemberController::class, "update"])->name("member.update");
 Route::post("/member/{id}", [MemberController::class, "destroy"])->name("member.destroy");
@@ -74,7 +73,7 @@ Route::post("/paket/{id}/update", [PaketController::class, "update"])->name("pak
 Route::post("/paket/{id}", [PaketController::class, "destroy"])->name("paket.destroy");
 
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name("transaksi.index");
-Route::get('/dashboar/chart', [TransaksiController::class, 'chart'])->name("transaksi.chart");
+Route::get('/dashboard/chart', [TransaksiController::class, 'chart'])->name("transaksi.chart");
 Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name("transaksi.create");
 Route::post('/transaksi', [TransaksiController::class, 'store'])->name("transaksi.store");
 Route::get('/transaksi/export', [TransaksiController::class, 'export'])->name("transaksi.export");

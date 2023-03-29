@@ -151,16 +151,8 @@
             </button>
         </form>
           <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div> --}}
-          <p class="settings-heading mt-2">HEADER SKINS</p>
-        <div class="color-tiles mx-0 px-4">
-            <div class="tiles success"></div>
-            <div class="tiles warning"></div>
-            <div class="tiles danger"></div>
-            <div class="tiles info"></div>
-            <div class="tiles dark"></div>
-            <div class="tiles default"></div>
-          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+
         </div>
       </div>
       <div id="right-sidebar" class="settings-panel">
@@ -350,10 +342,11 @@
             </a>
           </li>
           @endif
-          @if(Auth::user()->id_role == 2 || Auth::user()->id_role == 1)
+          @if(Auth::user()->id_role == 2 || Auth::user()->id_role == 1 || Auth::user()->id_role == 3)
           <li class="nav-item">
             <a class="nav-link" href="{{ route("transaksi.index") }}">
-                <i class="icon-layout menu-icon"></i>
+
+                <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Transaksi</span>
             </a>
           </li>
@@ -367,7 +360,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route("voucher.index") }}">
-                <i class="icon-bar-graph menu-icon"></i>
+                <i class="icon-layout menu-icon"></i>
               <span class="menu-title">Voucher</span>
             </a>
           </li>
@@ -378,13 +371,6 @@
             </a>
           </li>
           @endif
-
-          <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Laporan</span>
-            </a>
-          </li>
         </ul>
       </nav>
 @endif

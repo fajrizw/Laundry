@@ -90,8 +90,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
+     </div>
+        {{--<div class="row">
         <div class="col-md-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
@@ -115,7 +115,7 @@
                   <h3 class="text-primary fs-30 font-weight-medium">34040</h3>
                 </div>
               </div>
-              {{-- <canvas id="order-chart"></canvas> --}}
+         <canvas id="order-chart"></canvas>
               <div id="chart"></div>
             </div>
           </div>
@@ -650,7 +650,7 @@
 
 
           </div>
-        </div>
+        </div> --}}
     </div>
     <!-- content-wrapper ends -->
     <!-- partial:partials/_footer.html -->
