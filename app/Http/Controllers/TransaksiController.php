@@ -60,18 +60,10 @@ class TransaksiController extends Controller
     public function update(Request $request, $id)
     {
         $transaksi = Transaksi::find($id);
-        $transaksi->kode_invoice = $request->kode_invoice;
-        $transaksi->id_outlet = $request->id_outlet;
-        $transaksi->id_member = $request->id_member;
-        $transaksi->tgl = $request->tgl;
-        $transaksi->batas_waktu = $request->batas_waktu;
-        $transaksi->tgl_bayar = $request->tgl_bayar;
+     
         $transaksi->status_pemesanan = $request->status_pemesanan;
         $transaksi->status_pembayaran = $request->status_pembayaran;
-        $transaksi->id_user = $request->id_user;
-        $transaksi->id_voucher = $request->id_voucher;
-        $transaksi->id_paket = $request->id_paket;
-        $transaksi->pajak = $request->pajak;
+
         $transaksi->update();
 
         return redirect()->route("transaksi.index")->with("message", [
